@@ -473,7 +473,7 @@ class FinForgotpasswordPage_Code extends StatelessWidget {
                     ),
                   ),
                   Pinned.fromSize(
-                    bounds: Rect.fromLTWH(507.0, 383.0, 362.0, 93.0),
+                    bounds: Rect.fromLTWH(516.0, 385.0, 362.0, 93.0),
                     size: Size(1376.0, 766.0),
                     fixedWidth: true,
                     fixedHeight: true,
