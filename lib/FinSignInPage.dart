@@ -12,13 +12,14 @@ class FinSignInPage extends StatelessWidget {
       backgroundColor: const Color(0xffffffff),
       body: Stack(
         children: <Widget>[
-          // Adobe XD layer: 'Background_3' (shape)
+          // Adobe XD layer: 'Background Sign In' (shape)
           Container(
             width: 1920.0,
             height: 1080.0,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: const AssetImage('assets/images/Background.png'),
+                image:
+                    const AssetImage('assets/images/SignInPage Background.png'),
                 fit: BoxFit.fill,
               ),
             ),

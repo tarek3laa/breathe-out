@@ -13,6 +13,22 @@ class FinPatientsDetailsPage extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Transform.translate(
+            offset: Offset(-8.0, 110.0),
+            child:
+                // Adobe XD layer: 'Patient Details Bac…' (shape)
+                Container(
+              width: 1943.0,
+              height: 991.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage(
+                      'assets/images/PD_Xray_CT_Export_addnewPatient Background.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
+          Transform.translate(
             offset: Offset(0.0, 110.0),
             child:
                 // Adobe XD layer: 'Right Side' (shape)
@@ -54,18 +70,19 @@ class FinPatientsDetailsPage extends StatelessWidget {
           Transform.translate(
             offset: Offset(281.0, 0.0),
             child:
-                // Adobe XD layer: 'Background Green' (group)
+                // Adobe XD layer: 'Header Green Shapes' (group)
                 SizedBox(
-              width: 1639.0,
-              height: 1080.0,
+              width: 799.0,
+              height: 92.0,
               child: Stack(
                 children: <Widget>[
                   Pinned.fromSize(
                     bounds: Rect.fromLTWH(433.0, 0.0, 366.4, 91.9),
-                    size: Size(1639.2, 1079.8),
+                    size: Size(799.4, 91.9),
+                    pinRight: true,
                     pinTop: true,
+                    pinBottom: true,
                     fixedWidth: true,
-                    fixedHeight: true,
                     child:
                         // Adobe XD layer: 'Green Header Right' (shape)
                         SvgPicture.string(
@@ -76,30 +93,15 @@ class FinPatientsDetailsPage extends StatelessWidget {
                   ),
                   Pinned.fromSize(
                     bounds: Rect.fromLTWH(0.0, 0.0, 309.3, 85.6),
-                    size: Size(1639.2, 1079.8),
+                    size: Size(799.4, 91.9),
                     pinLeft: true,
-                    pinTop: true,
-                    fixedWidth: true,
-                    fixedHeight: true,
-                    child:
-                        // Adobe XD layer: 'Green Header Left' (shape)
-                        SvgPicture.string(
-                      _svg_27tc3n,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(1091.0, 151.0, 548.2, 928.8),
-                    size: Size(1639.2, 1079.8),
-                    pinRight: true,
                     pinTop: true,
                     pinBottom: true,
                     fixedWidth: true,
                     child:
-                        // Adobe XD layer: 'Green Background Ri…' (shape)
+                        // Adobe XD layer: 'Green Header Left' (shape)
                         SvgPicture.string(
-                      _svg_jqo2wg,
+                      _svg_27tc3n,
                       allowDrawingOutsideViewBox: true,
                       fit: BoxFit.fill,
                     ),
@@ -1234,8 +1236,6 @@ const String _svg_puddb1 =
     '<svg viewBox="714.0 0.0 366.4 91.9" ><defs><filter id="shadow"><feDropShadow dx="0" dy="3" stdDeviation="10"/></filter></defs><path transform="translate(-2632.63, 873.81)" d="M 3447.25 -785.43701171875 C 3404.8291015625 -796.8030395507813 3371.64990234375 -832.75 3346.632080078125 -873.81201171875 L 3713.068115234375 -873.81201171875 C 3641.203125 -825.1929931640625 3543.68505859375 -781.9310302734375 3476.84716796875 -781.9310302734375 C 3466.870849609375 -781.808349609375 3456.921142578125 -782.9869384765625 3447.249755859375 -785.4369506835938 Z" fill="#9dc6a7" fill-opacity="0.25" stroke="none" stroke-width="1" stroke-opacity="0.25" stroke-miterlimit="4" stroke-linecap="butt" filter="url(#shadow)"/></svg>';
 const String _svg_27tc3n =
     '<svg viewBox="281.0 0.0 309.3 85.6" ><defs><filter id="shadow"><feDropShadow dx="0" dy="3" stdDeviation="6"/></filter></defs><path transform="translate(-2631.94, 735.15)" d="M 3101.949951171875 -649.8480224609375 C 3041.66796875 -655.2410278320313 2967.19384765625 -698.123046875 2912.93798828125 -735.1480102539063 L 3222.2080078125 -735.1480102539063 C 3188.9619140625 -691.958984375 3157.30810546875 -649.5180053710938 3109.407958984375 -649.5150146484375 C 3106.962646484375 -649.5130004882813 3104.4765625 -649.6240234375 3101.949951171875 -649.8480224609375 Z" fill="#9dc6a7" fill-opacity="0.25" stroke="none" stroke-width="1" stroke-opacity="0.25" stroke-miterlimit="4" stroke-linecap="butt" filter="url(#shadow)"/></svg>';
-const String _svg_jqo2wg =
-    '<svg viewBox="1372.0 151.0 548.2 928.8" ><defs><filter id="shadow"><feDropShadow dx="0" dy="3" stdDeviation="10"/></filter></defs><path transform="translate(-2070.27, 1122.45)" d="M 3458.75 -42.67800140380859 C 3440.050048828125 -132.7929992675781 3432.681884765625 -221.6159973144531 3461.56103515625 -263.4140014648438 C 3531.781982421875 -365.0499877929688 3711.031005859375 -266.1860046386719 3820.06103515625 -403.8560180664063 C 3929.091064453125 -541.5260009765625 3712.882080078125 -706.9169921875 3796.0380859375 -825.1840209960938 C 3836.703125 -883.0180053710938 3918.009033203125 -934.217041015625 3990.498046875 -971.447021484375 L 3990.498046875 -42.677001953125 L 3458.75 -42.67800140380859 Z" fill="#9dc6a7" fill-opacity="0.25" stroke="none" stroke-width="1" stroke-opacity="0.25" stroke-miterlimit="4" stroke-linecap="butt" filter="url(#shadow)"/></svg>';
 const String _svg_k4y6ez =
     '<svg viewBox="1070.0 26.0 60.0 60.0" ><path transform="translate(1068.0, 24.0)" d="M 32.00000381469727 2 C 15.44000148773193 2 2 15.44000148773193 2 32.00000381469727 C 2 48.56000518798828 15.44000148773193 62 32.00000381469727 62 C 48.56000518798828 62 62 48.56000518798828 62 32.00000381469727 C 62 15.44000148773193 48.56000518798828 2 32.00000381469727 2 Z M 32.00000381469727 11.00000286102295 C 36.97999954223633 11.00000286102295 41.00000381469727 15.02000331878662 41.00000381469727 20.00000190734863 C 41.00000381469727 24.98000335693359 36.97999954223633 29.00000190734863 32.00000381469727 29.00000190734863 C 27.0200023651123 29.00000190734863 23.00000381469727 24.98000335693359 23.00000381469727 20.00000190734863 C 23.00000381469727 15.02000331878662 27.0200023651123 11.00000286102295 32.00000381469727 11.00000286102295 Z M 32.00000381469727 53.60000610351563 C 24.50000190734863 53.60000610351563 17.87000274658203 49.76000595092773 14.00000190734863 43.94000244140625 C 14.09000301361084 37.97000503540039 26.00000381469727 34.70000457763672 32.00000381469727 34.70000457763672 C 37.97000122070313 34.70000457763672 49.90999984741211 37.97000503540039 50.00000762939453 43.94000244140625 C 46.13000106811523 49.76000595092773 39.50000381469727 53.60000610351563 32.00000381469727 53.60000610351563 Z" fill="#727272" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
 const String _svg_jz6o4f =
