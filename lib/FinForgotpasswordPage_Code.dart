@@ -1,11 +1,21 @@
+import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class FinForgotpasswordPage_Code extends StatelessWidget {
-  FinForgotpasswordPage_Code({
-    Key key,
-  }) : super(key: key);
+import 'FinSignUpPage.dart';
+
+class FinForgotPasswordPageCode extends StatefulWidget {
+  @override
+  _FinForgotPasswordPageCodeState createState() {
+    // TODO: implement createState
+    return _FinForgotPasswordPageCodeState();
+  }
+}
+
+class _FinForgotPasswordPageCodeState extends State<FinForgotPasswordPageCode> {
+  final code = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -264,8 +274,10 @@ class FinForgotpasswordPage_Code extends StatelessWidget {
                           pinTop: true,
                           pinBottom: true,
                           child:
-                              // Adobe XD layer: 'Email_input' (shape)
+                              // Adobe XD layer: 'code_input' (shape)
                               Container(
+                            padding: EdgeInsets.all(10),
+                            child: textField(code, false, '', 20),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.0),
                               color: const Color(0xfff4f4f4),
@@ -367,14 +379,17 @@ class FinForgotpasswordPage_Code extends StatelessWidget {
                           pinRight: true,
                           pinTop: true,
                           pinBottom: true,
-                          child: Text(
-                            'Sign up',
-                            style: TextStyle(
-                              fontFamily: 'Helvetica Now Text',
-                              fontSize: 29,
-                              color: const Color(0xff519872),
+                          child: GestureDetector(
+                            onTap: () => pushPage(context, FinSignUpPage()),
+                            child: Text(
+                              'Sign up',
+                              style: TextStyle(
+                                fontFamily: 'Helvetica Now Text',
+                                fontSize: 29,
+                                color: const Color(0xff519872),
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
                         ),
                       ],
@@ -386,9 +401,12 @@ class FinForgotpasswordPage_Code extends StatelessWidget {
           ),
           Transform.translate(
             offset: Offset(1555.0, 200.0),
-            child: SvgPicture.string(
-              _svg_bsbwav,
-              allowDrawingOutsideViewBox: true,
+            child: GestureDetector(
+              onTap: () => popPage(context),
+              child: SvgPicture.string(
+                _svg_bsbwav,
+                allowDrawingOutsideViewBox: true,
+              ),
             ),
           ),
         ],

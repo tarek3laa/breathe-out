@@ -1,11 +1,21 @@
+import 'package:breathe_out/FinForgotpasswordPage_Code.dart';
+import 'package:breathe_out/FinSignUpPage.dart';
+import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class FinForgotpasswordPage extends StatelessWidget {
-  FinForgotpasswordPage({
-    Key key,
-  }) : super(key: key);
+class FinForgotPasswordPage extends StatefulWidget {
+  @override
+  _FinForgotPasswordPageState createState() {
+    // TODO: implement createState
+    return _FinForgotPasswordPageState();
+  }
+}
+
+class _FinForgotPasswordPageState extends State<FinForgotPasswordPage> {
+  final email = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -255,6 +265,8 @@ class FinForgotpasswordPage extends StatelessWidget {
                     child:
                         // Adobe XD layer: 'Email_input' (shape)
                         Container(
+                      padding: EdgeInsets.all(10),
+                      child: textField(email, false, '', 20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -326,14 +338,17 @@ class FinForgotpasswordPage extends StatelessWidget {
                           pinRight: true,
                           pinTop: true,
                           pinBottom: true,
-                          child: Text(
-                            'Sign up',
-                            style: TextStyle(
-                              fontFamily: 'Helvetica Now Text',
-                              fontSize: 29,
-                              color: const Color(0xff519872),
+                          child: GestureDetector(
+                            onTap: signUpAction,
+                            child: Text(
+                              'Sign up',
+                              style: TextStyle(
+                                fontFamily: 'Helvetica Now Text',
+                                fontSize: 29,
+                                color: const Color(0xff519872),
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
                         ),
                       ],
@@ -346,41 +361,44 @@ class FinForgotpasswordPage extends StatelessWidget {
                     fixedHeight: true,
                     child:
                         // Adobe XD layer: 'Continue' (group)
-                        Stack(
-                      children: <Widget>[
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 0.0, 362.0, 93.0),
-                          size: Size(362.0, 93.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          child:
-                              // Adobe XD layer: 'Proceed Button' (shape)
-                              Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4.0),
-                              color: const Color(0xff519872),
+                        GestureDetector(
+                      onTap: continueAction,
+                      child: Stack(
+                        children: <Widget>[
+                          Pinned.fromSize(
+                            bounds: Rect.fromLTWH(0.0, 0.0, 362.0, 93.0),
+                            size: Size(362.0, 93.0),
+                            pinLeft: true,
+                            pinRight: true,
+                            pinTop: true,
+                            pinBottom: true,
+                            child:
+                                // Adobe XD layer: 'Proceed Button' (shape)
+                                Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4.0),
+                                color: const Color(0xff519872),
+                              ),
                             ),
                           ),
-                        ),
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(101.0, 28.0, 149.0, 35.0),
-                          size: Size(362.0, 93.0),
-                          fixedWidth: true,
-                          fixedHeight: true,
-                          child: Text(
-                            'Continue',
-                            style: TextStyle(
-                              fontFamily: 'Helvetica Now Text',
-                              fontSize: 35,
-                              color: const Color(0xffffffff),
-                              fontWeight: FontWeight.w500,
+                          Pinned.fromSize(
+                            bounds: Rect.fromLTWH(101.0, 28.0, 149.0, 35.0),
+                            size: Size(362.0, 93.0),
+                            fixedWidth: true,
+                            fixedHeight: true,
+                            child: Text(
+                              'Continue',
+                              style: TextStyle(
+                                fontFamily: 'Helvetica Now Text',
+                                fontSize: 35,
+                                color: const Color(0xffffffff),
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.left,
                             ),
-                            textAlign: TextAlign.left,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -389,14 +407,30 @@ class FinForgotpasswordPage extends StatelessWidget {
           ),
           Transform.translate(
             offset: Offset(1555.0, 200.0),
-            child: SvgPicture.string(
-              _svg_bsbwav,
-              allowDrawingOutsideViewBox: true,
+            child: GestureDetector(
+              onTap: closeAction,
+              child: SvgPicture.string(
+                _svg_bsbwav,
+                allowDrawingOutsideViewBox: true,
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  void signUpAction() {
+    pushPage(context, FinSignUpPage());
+  }
+
+  void continueAction() {
+    //send code to email
+    pushPage(context, FinForgotPasswordPageCode());
+  }
+
+  void closeAction() {
+    popPage(context);
   }
 }
 

@@ -1,13 +1,35 @@
+import 'package:breathe_out/data_model/doctor.dart';
+import 'package:breathe_out/main_screen/header.dart';
+import 'package:breathe_out/main_screen/left_side.dart';
+import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class FinPatientsDetailsPage extends StatelessWidget {
-  FinPatientsDetailsPage({
-    Key key,
-  }) : super(key: key);
+import 'data_model/patient.dart';
+import 'main_screen/tabs.dart';
+
+class FinPatientsDetailsPage extends StatefulWidget {
+  final Doctor doctor;
+
+  FinPatientsDetailsPage(this.doctor);
+
+  @override
+  _FinPatientsDetailsPageState createState() {
+    return _FinPatientsDetailsPageState(doctor);
+  }
+}
+
+class _FinPatientsDetailsPageState extends State<FinPatientsDetailsPage> {
   @override
   Widget build(BuildContext context) {
+    if (widget.doctor.listOfPatients.isEmpty) {
+      popPage(context);
+      return Container();
+    }
+    final listView = PatientsListView(context, patients, setState);
+    Patient patient = listView.currentPatient;
+    print(listView.currentPatient);
     return Scaffold(
       backgroundColor: const Color(0xfff6f6f6),
       body: Stack(
@@ -110,347 +132,18 @@ class FinPatientsDetailsPage extends StatelessWidget {
               ),
             ),
           ),
-          Transform.translate(
-            offset: Offset(1070.0, 26.0),
-            child: SvgPicture.string(
-              _svg_k4y6ez,
-              allowDrawingOutsideViewBox: true,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 330.0),
-            child: Text(
-              'Patients',
-              style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 40,
-                color: const Color(0xffffffff),
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(0.0, 379.0),
-            child:
-                // Adobe XD layer: 'Patient Selection' (shape)
-                Container(
-              width: 560.0,
-              height: 142.0,
-              decoration: BoxDecoration(
-                color: const Color(0x54ffffff),
-                border: Border.all(width: 1.0, color: const Color(0x54707070)),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 145.0),
-            child:
-                // Adobe XD layer: 'Search Bar' (group)
-                SizedBox(
-              width: 464.0,
-              height: 63.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 63.0),
-                    size: Size(464.0, 63.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Search Bar' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.0),
-                        border: Border.all(
-                            width: 2.0, color: const Color(0xffffffff)),
-                      ),
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(25.0, 18.0, 208.0, 31.0),
-                    size: Size(464.0, 63.0),
-                    pinLeft: true,
-                    fixedWidth: true,
-                    fixedHeight: true,
-                    child: Text(
-                      'search by name',
-                      style: TextStyle(
-                        fontFamily: 'Helvetica Now Text',
-                        fontSize: 28,
-                        color: const Color(0xa6ffffff),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(410.0, 18.0, 27.0, 27.0),
-                    size: Size(464.0, 63.0),
-                    pinRight: true,
-                    fixedWidth: true,
-                    fixedHeight: true,
-                    child:
-                        // Adobe XD layer: 'Search Icon' (shape)
-                        SvgPicture.string(
-                      _svg_jz6o4f,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 412.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 554.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 696.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 838.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 980.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(1165.0, 37.0),
-            child: Text(
-              'Doc Name',
-              style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 35,
-                color: const Color(0xff727272),
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 30.0),
-            child: Text(
-              'Breathe Out',
-              style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 35,
-                color: const Color(0xff727272),
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 249.0),
-            child:
-                // Adobe XD layer: 'Add a new patient' (group)
-                SizedBox(
-              width: 325.0,
-              height: 38.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 325.0, 38.0),
-                    size: Size(325.0, 38.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child: Text(
-                      '+ add a new patient',
-                      style: TextStyle(
-                        fontFamily: 'Helvetica Now Text',
-                        fontSize: 35,
-                        color: const Color(0xa6ffffff),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(622.8, 143.0),
-            child: SizedBox(
-              width: 134.0,
-              child: Text(
-                'Details',
-                style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
-                  fontSize: 35,
-                  color: const Color(0xff000000),
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(857.2, 143.0),
-            child: SizedBox(
-              width: 118.0,
-              child: Text(
-                'X-Ray',
-                style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
-                  fontSize: 35,
-                  color: const Color(0x80000000),
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(1137.0, 143.0),
-            child: SizedBox(
-              width: 168.0,
-              child: Text(
-                'CT-Scan',
-                style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
-                  fontSize: 35,
-                  color: const Color(0x80000000),
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+          doctorShape(),
+          patientsShape(),
+
+          searchBar(),
+          listView.patientsListView(),
+          doctorName(widget.doctor.name),
+          appName(),
+          addNewPatient(context, widget.doctor),
+          details(context, widget.doctor),
+          xRay(),
+          ctScan(context, widget.doctor),
+          export(),
           Transform.translate(
             offset: Offset(600.0, 290.0),
             child:
@@ -483,6 +176,16 @@ class FinPatientsDetailsPage extends StatelessWidget {
                         ),
                       ),
                     ),
+                  ),
+                  Pinned.fromSize(
+                    bounds: Rect.fromLTWH(270, 0.0, 160.0, 160.0),
+                    size: Size(395, 379),
+                    pinTop: true,
+                    fixedWidth: true,
+                    fixedHeight: true,
+                    child: GestureDetector(
+                        onTap: () => print('edit'),
+                        child: Container(child: Icon(Icons.edit))),
                   ),
                   Pinned.fromSize(
                     bounds: Rect.fromLTWH(117.0, 29.0, 160.0, 160.0),
@@ -523,14 +226,16 @@ class FinPatientsDetailsPage extends StatelessWidget {
                     fixedHeight: true,
                     child:
                         // Adobe XD layer: 'Pateint Email' (text)
-                        Text(
-                      'patient@example.com',
-                      style: TextStyle(
-                        fontFamily: 'Helvetica Now Text',
-                        fontSize: 30,
-                        color: const Color(0xff727272),
+                        Center(
+                      child: Text(
+                        patient.phoneNumber,
+                        style: TextStyle(
+                          fontFamily: 'Helvetica Now Text',
+                          fontSize: 30,
+                          color: const Color(0xff727272),
+                        ),
+                        textAlign: TextAlign.left,
                       ),
-                      textAlign: TextAlign.left,
                     ),
                   ),
                   Pinned.fromSize(
@@ -541,7 +246,7 @@ class FinPatientsDetailsPage extends StatelessWidget {
                     child:
                         // Adobe XD layer: 'Pateint Email' (text)
                         Text(
-                      'Patient Name',
+                      patient.name,
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 30,
@@ -575,7 +280,7 @@ class FinPatientsDetailsPage extends StatelessWidget {
                 // Adobe XD layer: 'Patient Details' (group)
                 SizedBox(
               width: 878.0,
-              height: 485.0,
+              height: 385.0,
               child: Stack(
                 children: <Widget>[
                   Pinned.fromSize(
@@ -595,7 +300,7 @@ class FinPatientsDetailsPage extends StatelessWidget {
                     ),
                   ),
                   Pinned.fromSize(
-                    bounds: Rect.fromLTWH(36.0, 33.0, 85.0, 69.0),
+                    bounds: Rect.fromLTWH(36.0, 33.0, 100.0, 69.0),
                     size: Size(878.0, 485.0),
                     pinLeft: true,
                     pinTop: true,
@@ -606,7 +311,7 @@ class FinPatientsDetailsPage extends StatelessWidget {
                         Stack(
                       children: <Widget>[
                         Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 0.0, 85.0, 24.0),
+                          bounds: Rect.fromLTWH(0.0, 0.0, 100.0, 24.0),
                           size: Size(85.0, 69.0),
                           pinLeft: true,
                           pinRight: true,
@@ -623,17 +328,17 @@ class FinPatientsDetailsPage extends StatelessWidget {
                           ),
                         ),
                         Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 40.0, 63.0, 29.0),
-                          size: Size(85.0, 69.0),
+                          bounds: Rect.fromLTWH(0.0, 40.0, 100.0, 40.0),
+                          size: Size(90, 70.0),
                           pinLeft: true,
                           pinBottom: true,
                           fixedWidth: true,
                           fixedHeight: true,
                           child: Text(
-                            'Male',
+                            (patient.gender == Gender.MALE) ? 'male' : 'female',
                             style: TextStyle(
                               fontFamily: 'Helvetica Now Text',
-                              fontSize: 28,
+                              fontSize: 30,
                               color: const Color(0xff000000),
                               fontWeight: FontWeight.w500,
                             ),
@@ -678,7 +383,7 @@ class FinPatientsDetailsPage extends StatelessWidget {
                           fixedWidth: true,
                           fixedHeight: true,
                           child: Text(
-                            '26/6/2019',
+                            patient.registeredDate.toString(),
                             style: TextStyle(
                               fontFamily: 'Helvetica Now Text',
                               fontSize: 28,
@@ -692,7 +397,7 @@ class FinPatientsDetailsPage extends StatelessWidget {
                     ),
                   ),
                   Pinned.fromSize(
-                    bounds: Rect.fromLTWH(36.0, 189.0, 319.0, 71.0),
+                    bounds: Rect.fromLTWH(36.0, 190.0, 319.0, 71.0),
                     size: Size(878.0, 485.0),
                     pinLeft: true,
                     fixedWidth: true,
@@ -726,7 +431,7 @@ class FinPatientsDetailsPage extends StatelessWidget {
                           pinBottom: true,
                           fixedHeight: true,
                           child: Text(
-                            'address, Example, No.11',
+                            patient.address,
                             style: TextStyle(
                               fontFamily: 'Helvetica Now Text',
                               fontSize: 28,
@@ -740,7 +445,7 @@ class FinPatientsDetailsPage extends StatelessWidget {
                     ),
                   ),
                   Pinned.fromSize(
-                    bounds: Rect.fromLTWH(520.0, 184.0, 53.0, 73.0),
+                    bounds: Rect.fromLTWH(36.0, 350.0, 53.0, 73.0),
                     size: Size(878.0, 485.0),
                     fixedWidth: true,
                     fixedHeight: true,
@@ -773,7 +478,7 @@ class FinPatientsDetailsPage extends StatelessWidget {
                           fixedWidth: true,
                           fixedHeight: true,
                           child: Text(
-                            '38',
+                            patient.age.toString(),
                             style: TextStyle(
                               fontFamily: 'Helvetica Now Text',
                               fontSize: 28,
@@ -787,56 +492,7 @@ class FinPatientsDetailsPage extends StatelessWidget {
                     ),
                   ),
                   Pinned.fromSize(
-                    bounds: Rect.fromLTWH(39.0, 360.0, 203.0, 69.0),
-                    size: Size(878.0, 485.0),
-                    pinLeft: true,
-                    pinBottom: true,
-                    fixedWidth: true,
-                    fixedHeight: true,
-                    child:
-                        // Adobe XD layer: 'Phone Number' (group)
-                        Stack(
-                      children: <Widget>[
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 0.0, 169.0, 24.0),
-                          size: Size(203.0, 69.0),
-                          pinLeft: true,
-                          pinTop: true,
-                          fixedWidth: true,
-                          fixedHeight: true,
-                          child: Text(
-                            'Phone Number',
-                            style: TextStyle(
-                              fontFamily: 'Helvetica Now Text',
-                              fontSize: 24,
-                              color: const Color(0xff919191),
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 40.0, 203.0, 29.0),
-                          size: Size(203.0, 69.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          pinBottom: true,
-                          fixedHeight: true,
-                          child: Text(
-                            '+201111158471',
-                            style: TextStyle(
-                              fontFamily: 'Helvetica Now Text',
-                              fontSize: 28,
-                              color: const Color(0xff000000),
-                              fontWeight: FontWeight.w500,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(520.0, 312.0, 216.0, 118.1),
+                    bounds: Rect.fromLTWH(520.0, 250.0, 216.0, 118.1),
                     size: Size(878.0, 485.0),
                     pinBottom: true,
                     fixedWidth: true,
@@ -967,8 +623,8 @@ class FinPatientsDetailsPage extends StatelessWidget {
             child:
                 // Adobe XD layer: 'Notes' (group)
                 SizedBox(
-              width: 395.0,
-              height: 373.0,
+              width: 1280.0,
+              height: 300.0,
               child: Stack(
                 children: <Widget>[
                   Pinned.fromSize(
@@ -996,52 +652,6 @@ class FinPatientsDetailsPage extends StatelessWidget {
                     fixedHeight: true,
                     child: Text(
                       'Notes',
-                      style: TextStyle(
-                        fontFamily: 'Helvetica Now Text',
-                        fontSize: 24,
-                        color: const Color(0xff919191),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(1004.0, 781.0),
-            child:
-                // Adobe XD layer: 'New Details' (group)
-                SizedBox(
-              width: 878.0,
-              height: 276.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 878.0, 276.0),
-                    size: Size(878.0, 276.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'New Details' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: const Color(0xffffffff),
-                      ),
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(39.0, 27.0, 198.0, 24.0),
-                    size: Size(878.0, 276.0),
-                    pinLeft: true,
-                    pinTop: true,
-                    fixedWidth: true,
-                    fixedHeight: true,
-                    child: Text(
-                      '+ add new details',
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 24,
@@ -1210,25 +820,15 @@ class FinPatientsDetailsPage extends StatelessWidget {
               ),
             ),
           ),
-          Transform.translate(
-            offset: Offset(1447.0, 143.0),
-            child: SizedBox(
-              width: 132.0,
-              child: Text(
-                'Export',
-                style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
-                  fontSize: 35,
-                  color: const Color(0x80000000),
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
         ],
       ),
     );
+  }
+
+  List<Patient> patients;
+
+  _FinPatientsDetailsPageState(Doctor doctor) {
+    patients = doctor.listOfPatients;
   }
 }
 

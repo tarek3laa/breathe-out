@@ -1,3 +1,5 @@
+import 'package:breathe_out/FinAboutPage.dart';
+import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 
@@ -5,6 +7,7 @@ class FinTeamPage extends StatelessWidget {
   FinTeamPage({
     Key key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,43 +30,7 @@ class FinTeamPage extends StatelessWidget {
               ),
             ),
           ),
-          Transform.translate(
-            offset: Offset(1091.0, 22.0),
-            child:
-                // Adobe XD layer: 'Top Bar' (shape)
-                Container(
-              width: 144.0,
-              height: 10.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(23.0),
-                color: const Color(0xff9dc6a7),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(883.0, 61.0),
-            child: Text(
-              'about',
-              style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 40,
-                color: const Color(0xff000000),
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(1110.0, 61.0),
-            child: Text(
-              'team',
-              style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 40,
-                color: const Color(0xff000000),
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
+          closeButton(context, false),
           Transform.translate(
             offset: Offset(238.0, 331.0),
             child:

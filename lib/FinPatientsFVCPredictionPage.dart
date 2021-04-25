@@ -1,13 +1,38 @@
+import 'package:breathe_out/data_model/doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:io';
+import 'data_model/patient.dart';
+import 'main_screen/header.dart';
+import 'main_screen/left_side.dart';
+import 'main_screen/tabs.dart';
+import 'package:file_picker/file_picker.dart';
 
-class FinPatientsFVCPredictionPage extends StatelessWidget {
-  FinPatientsFVCPredictionPage({
-    Key key,
-  }) : super(key: key);
+class FinPatientsFVCPredictionPage extends StatefulWidget {
+  final Doctor doctor;
+
+  FinPatientsFVCPredictionPage(this.doctor);
+
+  @override
+  _FinPatientsFVCPredictionPageState createState() {
+    return _FinPatientsFVCPredictionPageState(doctor);
+  }
+}
+
+class _FinPatientsFVCPredictionPageState
+    extends State<FinPatientsFVCPredictionPage> {
+  List<Patient> patients;
+
+  _FinPatientsFVCPredictionPageState(Doctor doctor) {
+    patients = doctor.listOfPatients;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final listView = PatientsListView(context, patients, setState);
+    Patient patient = listView.currentPatient;
     return Scaffold(
       backgroundColor: const Color(0xfff6f6f6),
       body: Stack(
@@ -117,323 +142,20 @@ class FinPatientsFVCPredictionPage extends StatelessWidget {
               allowDrawingOutsideViewBox: true,
             ),
           ),
-          Transform.translate(
-            offset: Offset(48.0, 330.0),
-            child: Text(
-              'Patients',
-              style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 40,
-                color: const Color(0xffffffff),
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(0.0, 379.0),
-            child:
-                // Adobe XD layer: 'Patient Selection' (shape)
-                Container(
-              width: 560.0,
-              height: 142.0,
-              decoration: BoxDecoration(
-                color: const Color(0x54ffffff),
-                border: Border.all(width: 1.0, color: const Color(0x54707070)),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 145.0),
-            child:
-                // Adobe XD layer: 'Search Bar' (group)
-                SizedBox(
-              width: 464.0,
-              height: 63.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 63.0),
-                    size: Size(464.0, 63.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Search Bar' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.0),
-                        border: Border.all(
-                            width: 2.0, color: const Color(0xffffffff)),
-                      ),
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(25.0, 18.0, 208.0, 31.0),
-                    size: Size(464.0, 63.0),
-                    pinLeft: true,
-                    fixedWidth: true,
-                    fixedHeight: true,
-                    child: Text(
-                      'search by name',
-                      style: TextStyle(
-                        fontFamily: 'Helvetica Now Text',
-                        fontSize: 28,
-                        color: const Color(0xa6ffffff),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(410.0, 18.0, 27.0, 27.0),
-                    size: Size(464.0, 63.0),
-                    pinRight: true,
-                    fixedWidth: true,
-                    fixedHeight: true,
-                    child:
-                        // Adobe XD layer: 'Search Icon' (shape)
-                        SvgPicture.string(
-                      _svg_jz6o4f,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 412.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 554.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 696.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 838.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 980.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(1165.0, 37.0),
-            child: Text(
-              'Doc Name',
-              style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 35,
-                color: const Color(0xff727272),
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 30.0),
-            child: Text(
-              'Breathe Out',
-              style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 35,
-                color: const Color(0xff727272),
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 249.0),
-            child: Text(
-              '+ add a new patient',
-              style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 35,
-                color: const Color(0xb2ffffff),
-                fontWeight: FontWeight.w300,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(622.8, 143.0),
-            child: SizedBox(
-              width: 134.0,
-              child: Text(
-                'Details',
-                style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
-                  fontSize: 35,
-                  color: const Color(0x80000000),
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(857.2, 143.0),
-            child: SizedBox(
-              width: 118.0,
-              child: Text(
-                'X-Ray',
-                style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
-                  fontSize: 35,
-                  color: const Color(0x80000000),
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(1137.0, 143.0),
-            child: SizedBox(
-              width: 168.0,
-              child: Text(
-                'CT-Scan',
-                style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
-                  fontSize: 35,
-                  color: const Color(0xff000000),
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+
+          doctorShape(),
+          patientsShape(),
+
+          searchBar(),
+          listView.patientsListView(),
+          doctorName(widget.doctor.name),
+          appName(),
+          addNewPatient(context, widget.doctor),
+          details(context, widget.doctor),
+          xRay(),
+          ctScan(context, widget.doctor),
+          export(),
+
           Transform.translate(
             offset: Offset(1109.5, 197.5),
             child: SvgPicture.string(
@@ -442,112 +164,33 @@ class FinPatientsFVCPredictionPage extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(931.0, 847.0),
-            child:
-                // Adobe XD layer: 'Predict Next FVC' (group)
-                SizedBox(
-              width: 308.0,
-              height: 89.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 308.0, 89.0),
-                    size: Size(308.0, 89.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Predict Next FVC Ho…' (group)
-                        Stack(
-                      children: <Widget>[
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 0.0, 308.0, 89.0),
-                          size: Size(308.0, 89.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          child:
-                              // Adobe XD layer: 'Submit' (shape)
-                              Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(19.0),
-                              color: const Color(0xffccedd2),
-                            ),
-                          ),
-                        ),
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(30.0, 29.0, 248.0, 31.0),
-                          size: Size(308.0, 89.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          fixedHeight: true,
-                          child: Text(
-                            'Predict Next FVC',
-                            style: TextStyle(
-                              fontFamily: 'Helvetica Now Text',
-                              fontSize: 31,
-                              color: const Color(0xffffffff),
-                              fontWeight: FontWeight.w500,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
+              offset: Offset(931.0, 847.0),
+              child: GestureDetector(
+                onTap: () => print('a5iran'),
+                child: Container(
+                  width: 308,
+                  height: 89,
+                  child: Center(
+                    child: Text(
+                      'Predict Next FVC',
+                      style: TextStyle(
+                        fontFamily: 'Helvetica Now Text',
+                        fontSize: 31,
+                        color: const Color(0xffffffff),
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 308.0, 89.0),
-                    size: Size(308.0, 89.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Predict Next FVC De…' (group)
-                        Stack(
-                      children: <Widget>[
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 0.0, 308.0, 89.0),
-                          size: Size(308.0, 89.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          child:
-                              // Adobe XD layer: 'Submit' (shape)
-                              Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(19.0),
-                              color: const Color(0xff8fc0a9),
-                            ),
-                          ),
-                        ),
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(30.0, 29.0, 248.0, 31.0),
-                          size: Size(308.0, 89.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          fixedHeight: true,
-                          child: Text(
-                            'Predict Next FVC',
-                            style: TextStyle(
-                              fontFamily: 'Helvetica Now Text',
-                              fontSize: 31,
-                              color: const Color(0xffffffff),
-                              fontWeight: FontWeight.w500,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
-                    ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(19.0),
+                    color: const Color(0xffccedd2),
                   ),
-                ],
+                ),
+              )
+              // Adobe XD layer: 'Predict Next FVC' (group)
+
               ),
-            ),
-          ),
           Transform.translate(
             offset: Offset(634.0, 228.0),
             child:
@@ -565,40 +208,56 @@ class FinPatientsFVCPredictionPage extends StatelessWidget {
             offset: Offset(999.0, 387.0),
             child:
                 // Adobe XD layer: 'Upload Icon' (group)
-                SizedBox(
-              width: 172.0,
-              height: 190.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 172.0, 190.0),
-                    size: Size(172.0, 190.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.0),
-                        border: Border.all(
-                            width: 8.0, color: const Color(0xff9dd6b3)),
+                GestureDetector(
+              onTap: pickImage,
+              child: SizedBox(
+                width: 172.0,
+                height: 190.0,
+                child: Stack(
+                  children: <Widget>[
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(0.0, 0.0, 172.0, 190.0),
+                      size: Size(172.0, 190.0),
+                      pinLeft: true,
+                      pinRight: true,
+                      pinTop: true,
+                      pinBottom: true,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6.0),
+                          border: Border.all(
+                              width: 8.0, color: const Color(0xff9dd6b3)),
+                        ),
                       ),
                     ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(61.4, 64.2, 50.0, 70.0),
-                    size: Size(172.0, 190.0),
-                    fixedWidth: true,
-                    fixedHeight: true,
-                    child:
-                        // Adobe XD layer: 'Icon ionic-ios-arro…' (shape)
-                        SvgPicture.string(
-                      _svg_y9i5rg,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(61.4, 64.2, 50.0, 70.0),
+                      size: Size(172.0, 190.0),
+                      fixedWidth: true,
+                      fixedHeight: true,
+                      child:
+                          // Adobe XD layer: 'Icon ionic-ios-arro…' (shape)
+                          SvgPicture.string(
+                        _svg_y9i5rg,
+                        allowDrawingOutsideViewBox: true,
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  ),
-                ],
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(20.4, 200.2, 250.0, 70.0),
+                      size: Size(172.0, 190.0),
+                      fixedWidth: true,
+                      fixedHeight: true,
+                      child:
+                          // Adobe XD layer: 'Icon ionic-ios-arro…' (shape)
+                          Center(
+                              child: Text(
+                        'only axial view',
+                        style: TextStyle(fontSize: 25),
+                      )),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -751,25 +410,13 @@ class FinPatientsFVCPredictionPage extends StatelessWidget {
               ),
             ),
           ),
-          Transform.translate(
-            offset: Offset(1447.0, 143.0),
-            child: SizedBox(
-              width: 132.0,
-              child: Text(
-                'Export',
-                style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
-                  fontSize: 35,
-                  color: const Color(0x80000000),
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
         ],
       ),
     );
+  }
+
+  void pickImage() async {
+    FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: true,type: FileType.custom,allowedExtensions: ['dcm']);
   }
 }
 
