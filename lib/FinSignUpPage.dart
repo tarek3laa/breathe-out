@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:breathe_out/FinAddinganewpatient.dart';
 import 'package:breathe_out/FinPatientsDetailsPage.dart';
 import 'package:breathe_out/FinPlansPage.dart';
@@ -6,6 +8,7 @@ import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:http/http.dart' as http;
 
 import 'data_model/patient.dart';
 
@@ -399,9 +402,19 @@ class _FinSignUpPageState extends State<FinSignUpPage> {
         onTap: createAccountAction);
   }
 
-  void createAccountAction() {
+  void createAccountAction() async {
     Doctor doctor = Doctor.newDoctor(
         name.text, email.text, userName.text, phone.text, password.text, []);
-    pushPage(context, FinPlansPage(doctor));
+    var url = 'http://127.0.0.1:5000/signup';
+
+    var r = await http.post(url, body: doctor.toJson());
+    print(r.body);
+    var xd = await json.decode(r.body);
+    print(xd);
+    if (xd['code'] == 200)
+      pushPage(context, FinPlansPage(doctor));
+    else {
+      toast(xd['msg'], context);
+    }
   }
 }

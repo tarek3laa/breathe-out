@@ -1,3 +1,4 @@
+import 'package:breathe_out/FinExporting.dart';
 import 'package:breathe_out/FinPatientsDetailsPage.dart';
 import 'package:breathe_out/FinPatientsFVCPredictionPage.dart';
 import 'package:breathe_out/utils/utils.dart';
@@ -77,11 +78,11 @@ ctScan(context, doctor) {
   );
 }
 
-export() {
+export(context, doctor) {
   return Transform.translate(
     offset: Offset(1447.0, 143.0),
     child: GestureDetector(
-      onTap: () => print('4'),
+      onTap: () => pushPage(context, FinExporting(doctor)),
       child: SizedBox(
         width: 132.0,
         child: Text(

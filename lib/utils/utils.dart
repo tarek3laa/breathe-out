@@ -1,23 +1,47 @@
 import 'package:breathe_out/data_model/patient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:kumi_popup_window/kumi_popup_window.dart';
 import '../FinPatientsDetailsPage.dart';
 
 void pushPage(context, page) {
   Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));
 }
 
-void toast(msg, color) {
-  Fluttertoast.showToast(
-      msg: msg,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 1,
-      backgroundColor: color,
-      textColor: Colors.white,
-      fontSize: 16.0);
+void toast(msg, context) {
+  showPopupWindow(
+    context,
+    gravity: KumiPopupGravity.center,
+    //curve: Curves.elasticOut,
+    bgColor: Colors.grey.withOpacity(0.5),
+    clickOutDismiss: true,
+    clickBackDismiss: true,
+    customAnimation: false,
+    customPop: false,
+    customPage: false,
+    //targetRenderBox: (btnKey.currentContext.findRenderObject() as RenderBox),
+    //needSafeDisplay: true,
+    underStatusBar: false,
+    underAppBar: true,
+    offsetX: 0,
+    offsetY: 0,
+    duration: Duration(milliseconds: 200),
+    childFun: (pop) {
+      return Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4.0), color: Colors.redAccent),
+        key: GlobalKey(),
+        padding: EdgeInsets.all(20),
+        height: 200,
+        width: 600,
+        child: Center(
+            child: Text(
+          msg,
+          style: TextStyle(fontSize: 30),
+        )),
+      );
+    },
+  );
 }
 
 textField(controller, secure, hint, fontSize, {maxLines = 1}) {

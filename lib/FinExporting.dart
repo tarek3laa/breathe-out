@@ -1,13 +1,34 @@
+import 'package:breathe_out/main_screen/header.dart';
+import 'package:breathe_out/main_screen/left_side.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class FinExporting extends StatelessWidget {
-  FinExporting({
-    Key key,
-  }) : super(key: key);
+import 'data_model/doctor.dart';
+import 'data_model/patient.dart';
+
+class FinExporting extends StatefulWidget {
+  final Doctor doctor;
+
+  FinExporting(this.doctor);
+
+  @override
+  _FinExportingState createState() {
+    return _FinExportingState(doctor);
+  }
+}
+
+class _FinExportingState extends State<FinExporting> {
+  List<Patient> patients;
+
+  _FinExportingState(Doctor doctor) {
+    patients = doctor.listOfPatients;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final listView = PatientsListView(context, patients, setState);
+    Patient patient = listView.currentPatient;
     return Scaffold(
       backgroundColor: const Color(0xfff6f6f6),
       body: Stack(
@@ -117,274 +138,13 @@ class FinExporting extends StatelessWidget {
               allowDrawingOutsideViewBox: true,
             ),
           ),
-          Transform.translate(
-            offset: Offset(48.0, 322.0),
-            child: Text(
-              'Patients',
-              style: TextStyle(
-                fontFamily: 'Open Sans',
-                fontSize: 40,
-                color: const Color(0xffffffff),
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(0.0, 379.0),
-            child:
-                // Adobe XD layer: 'Patient Selection' (shape)
-                Container(
-              width: 560.0,
-              height: 142.0,
-              decoration: BoxDecoration(
-                color: const Color(0x54ffffff),
-                border: Border.all(width: 1.0, color: const Color(0x54707070)),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 145.0),
-            child:
-                // Adobe XD layer: 'Search Bar' (group)
-                SizedBox(
-              width: 464.0,
-              height: 63.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 63.0),
-                    size: Size(464.0, 63.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Search Bar' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.0),
-                        border: Border.all(
-                            width: 2.0, color: const Color(0xffffffff)),
-                      ),
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(25.0, 13.0, 207.0, 38.0),
-                    size: Size(464.0, 63.0),
-                    pinLeft: true,
-                    fixedWidth: true,
-                    fixedHeight: true,
-                    child: Text(
-                      'search by name',
-                      style: TextStyle(
-                        fontFamily: 'Open Sans',
-                        fontSize: 28,
-                        color: const Color(0xa6ffffff),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(410.0, 18.0, 27.0, 27.0),
-                    size: Size(464.0, 63.0),
-                    pinRight: true,
-                    fixedWidth: true,
-                    fixedHeight: true,
-                    child:
-                        // Adobe XD layer: 'Search Icon' (shape)
-                        SvgPicture.string(
-                      _svg_jz6o4f,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 412.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 554.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 696.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 838.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 980.0),
-            child:
-                // Adobe XD layer: 'Patients' (group)
-                SizedBox(
-              width: 464.0,
-              height: 76.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 464.0, 76.0),
-                    size: Size(464.0, 76.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Patient 1' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(19.0),
-                        color: const Color(0xb2ffffff),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(1165.0, 37.0),
-            child: Text(
-              'Doc Name',
-              style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 35,
-                color: const Color(0xff727272),
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 30.0),
-            child: Text(
-              'Breathe Out',
-              style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 35,
-                color: const Color(0xff727272),
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 243.0),
-            child: Text(
-              '+ add a new patient',
-              style: TextStyle(
-                fontFamily: 'Open Sans',
-                fontSize: 35,
-                color: const Color(0xa6ffffff),
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
+          patientsShape(),
+
+          searchBar(),
+
+          doctorName(''),
+          appName(),
+          addNewPatient(context, null),
           Transform.translate(
             offset: Offset(622.8, 143.0),
             child: SizedBox(

@@ -154,7 +154,7 @@ class _FinPatientsFVCPredictionPageState
           details(context, widget.doctor),
           xRay(),
           ctScan(context, widget.doctor),
-          export(),
+          export(context,widget.doctor),
 
           Transform.translate(
             offset: Offset(1109.5, 197.5),
@@ -416,7 +416,8 @@ class _FinPatientsFVCPredictionPageState
   }
 
   void pickImage() async {
-    FilePickerResult result = await FilePicker.platform.pickFiles(allowMultiple: true,type: FileType.custom,allowedExtensions: ['dcm']);
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+        allowMultiple: true, type: FileType.custom, allowedExtensions: ['dcm']);
   }
 }
 

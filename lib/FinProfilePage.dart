@@ -1,11 +1,28 @@
+import 'package:breathe_out/FinPlansPage.dart';
+import 'package:breathe_out/data_model/doctor.dart';
+import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class FinProfilePage extends StatelessWidget {
-  FinProfilePage({
-    Key key,
-  }) : super(key: key);
+import 'main_screen/header.dart';
+
+class FinProfilePage extends StatefulWidget {
+  final Doctor doctor;
+
+  FinProfilePage(this.doctor);
+
+  @override
+  _FinProfilePageState createState() {
+    return _FinProfilePageState();
+  }
+}
+
+class _FinProfilePageState extends State<FinProfilePage> {
+  final userName = TextEditingController();
+  final phone = TextEditingController();
+  final email = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,71 +45,9 @@ class FinProfilePage extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.translate(
-            offset: Offset(335.0, 135.0),
-            child:
-                // Adobe XD layer: 'Profile info' (group)
-                SizedBox(
-              width: 286.0,
-              height: 350.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 286.0, 286.0),
-                    size: Size(286.0, 350.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'PFP Outline' (shape)
-                        SvgPicture.string(
-                      _svg_amwd3y,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(9.0, 9.0, 268.0, 268.0),
-                    size: Size(286.0, 350.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    fixedHeight: true,
-                    child:
-                        // Adobe XD layer: 'PFP' (shape)
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(9999.0, 9999.0)),
-                        color: const Color(0xffffffff),
-                      ),
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(36.0, 305.0, 214.0, 45.0),
-                    size: Size(286.0, 350.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinBottom: true,
-                    fixedHeight: true,
-                    child: Text(
-                      'Username',
-                      style: TextStyle(
-                        fontFamily: 'Helvetica Now Text',
-                        fontSize: 45,
-                        color: const Color(0xffffffff),
-                        fontWeight: FontWeight.w700,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(251.0, 911.0),
+            offset: Offset(251.0, 880.0),
             child:
                 // Adobe XD layer: 'Phone Number' (group)
                 SizedBox(
@@ -110,6 +65,8 @@ class FinProfilePage extends StatelessWidget {
                     child:
                         // Adobe XD layer: 'First, last name' (shape)
                         Container(
+                      padding: EdgeInsets.all(20),
+                      child: textField(phone, false, '', 20.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -153,7 +110,7 @@ class FinProfilePage extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(251.0, 739.0),
+            offset: Offset(251.0, 700.0),
             child:
                 // Adobe XD layer: 'Email' (group)
                 SizedBox(
@@ -171,6 +128,8 @@ class FinProfilePage extends StatelessWidget {
                     child:
                         // Adobe XD layer: 'First, last name' (shape)
                         Container(
+                      padding: EdgeInsets.all(20),
+                      child: textField(email, false, '', 20.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -214,7 +173,7 @@ class FinProfilePage extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(251.0, 563.5),
+            offset: Offset(251.0, 530.5),
             child:
                 // Adobe XD layer: 'Username' (group)
                 SizedBox(
@@ -232,6 +191,8 @@ class FinProfilePage extends StatelessWidget {
                     child:
                         // Adobe XD layer: 'First, last name' (shape)
                         Container(
+                      padding: EdgeInsets.all(20),
+                      child: textField(userName, false, '', 20.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -364,285 +325,29 @@ class FinProfilePage extends StatelessWidget {
               allowDrawingOutsideViewBox: true,
             ),
           ),
-          Transform.translate(
-            offset: Offset(1165.0, 37.0),
-            child: Text(
-              'Doc Name',
-              style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 35,
-                color: const Color(0xff727272),
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(48.0, 30.0),
-            child: Text(
-              'Breathe Out',
-              style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 35,
-                color: const Color(0xff727272),
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(1825.0, 36.0),
-            child:
-                // Adobe XD layer: 'Menu Icon' (group)
-                SizedBox(
-              width: 60.0,
-              height: 38.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 60.0, 38.0),
-                    size: Size(60.0, 38.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Menu' (group)
-                        Stack(
-                      children: <Widget>[
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 0.0, 9.6, 38.0),
-                          size: Size(60.0, 38.0),
-                          pinLeft: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          fixedWidth: true,
-                          child:
-                              // Adobe XD layer: 'Dots' (group)
-                              Stack(
-                            children: <Widget>[
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 14.3, 9.6, 9.3),
-                                size: Size(9.6, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Middle Dot' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 28.7, 9.6, 9.3),
-                                size: Size(9.6, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                pinBottom: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Bottom Dot' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 0.0, 9.6, 9.3),
-                                size: Size(9.6, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                pinTop: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Top Dot' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(13.9, 0.0, 46.1, 38.0),
-                          size: Size(60.0, 38.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          child:
-                              // Adobe XD layer: 'Bars' (group)
-                              Stack(
-                            children: <Widget>[
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 14.3, 46.1, 9.3),
-                                size: Size(46.1, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Middle Bar' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 28.7, 46.1, 9.3),
-                                size: Size(46.1, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                pinBottom: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Bottom Bar' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 0.0, 46.1, 9.3),
-                                size: Size(46.1, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                pinTop: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Top Bar' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          doctorName(widget.doctor.name),
+          appName(),
+          menu(context, widget.doctor),
           Transform.translate(
             offset: Offset(48.0, 135.0),
             child:
                 // Adobe XD layer: 'Back Button' (group)
-                SizedBox(
-              width: 60.0,
-              height: 60.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 60.0, 60.0),
-                    size: Size(60.0, 60.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Back Button Hover' (group)
-                        Stack(
-                      children: <Widget>[
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(12.0, 12.0, 36.0, 36.0),
-                          size: Size(60.0, 60.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          child:
-                              // Adobe XD layer: 'ic_arrow_back_24px' (shape)
-                              SvgPicture.string(
-                            _svg_9jlg90,
-                            allowDrawingOutsideViewBox: true,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 0.0, 60.0, 60.0),
-                          size: Size(60.0, 60.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          child:
-                              // Adobe XD layer: 'Back Button Circle' (shape)
-                              Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                  Radius.elliptical(9999.0, 9999.0)),
-                              border: Border.all(
-                                  width: 6.0, color: const Color(0xffffffff)),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 60.0, 60.0),
-                    size: Size(60.0, 60.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Back Button Default' (group)
-                        Stack(
-                      children: <Widget>[
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(12.0, 12.0, 36.0, 36.0),
-                          size: Size(60.0, 60.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          child:
-                              // Adobe XD layer: 'ic_arrow_back_24px' (shape)
-                              SvgPicture.string(
-                            _svg_9jlg90,
-                            allowDrawingOutsideViewBox: true,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 0.0, 60.0, 60.0),
-                          size: Size(60.0, 60.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          child:
-                              // Adobe XD layer: 'Back Button Circle' (shape)
-                              Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                  Radius.elliptical(9999.0, 9999.0)),
-                              border: Border.all(
-                                  width: 6.0, color: const Color(0xffffffff)),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                GestureDetector(
+              onTap: () => popPage(context),
+              child: Container(
+                width: 60,
+                height: 60,
+                child: Icon(
+                  Icons.arrow_back,
+                  size: 30,
+                  color: Colors.white,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.all(Radius.elliptical(9999.0, 9999.0)),
+                  border:
+                      Border.all(width: 6.0, color: const Color(0xffffffff)),
+                ),
               ),
             ),
           ),
@@ -667,6 +372,11 @@ class FinProfilePage extends StatelessWidget {
             child:
                 // Adobe XD layer: 'Plan TextBox' (shape)
                 Container(
+              child: Center(
+                  child: Text(
+                (widget.doctor.plan) ? 'payed' : 'free',
+                style: TextStyle(fontSize: 30),
+              )),
               width: 275.3,
               height: 68.8,
               decoration: BoxDecoration(
@@ -686,20 +396,24 @@ class FinProfilePage extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 106.0, 31.0),
+                    bounds: Rect.fromLTWH(0.0, 0.0, 106.0, 35.0),
                     size: Size(106.0, 31.0),
                     pinLeft: true,
                     pinRight: true,
                     pinTop: true,
                     pinBottom: true,
-                    child: Text(
-                      'Change',
-                      style: TextStyle(
-                        fontFamily: 'Helvetica Now Text',
-                        fontSize: 29,
-                        color: const Color(0xff519872),
+                    child: GestureDetector(
+                      onTap: () =>
+                          pushPage(context, FinPlansPage(widget.doctor)),
+                      child: Text(
+                        'Change',
+                        style: TextStyle(
+                          fontFamily: 'Helvetica Now Text',
+                          fontSize: 29,
+                          color: const Color(0xff519872),
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
                 ],
@@ -707,48 +421,51 @@ class FinProfilePage extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(1358.0, 848.0),
+            offset: Offset(1358.0, 800.0),
             child:
                 // Adobe XD layer: 'Save Changes' (group)
-                SizedBox(
-              width: 168.0,
-              height: 157.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(34.0, 0.0, 100.0, 100.0),
-                    size: Size(168.0, 157.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    fixedHeight: true,
-                    child:
-                        // Adobe XD layer: 'ic_check_circle_24px' (shape)
-                        SvgPicture.string(
-                      _svg_3e8xnw,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 130.0, 168.0, 27.0),
-                    size: Size(168.0, 157.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinBottom: true,
-                    fixedHeight: true,
-                    child: Text(
-                      'Save Changes',
-                      style: TextStyle(
-                        fontFamily: 'Helvetica Now Text',
-                        fontSize: 25,
-                        color: const Color(0xff94d3ac),
-                        fontWeight: FontWeight.w500,
+                GestureDetector(
+              onTap: () => print('save'),
+              child: SizedBox(
+                width: 168.0,
+                height: 157.0,
+                child: Stack(
+                  children: <Widget>[
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(34.0, 0.0, 100.0, 100.0),
+                      size: Size(168.0, 157.0),
+                      pinLeft: true,
+                      pinRight: true,
+                      pinTop: true,
+                      fixedHeight: true,
+                      child:
+                          // Adobe XD layer: 'ic_check_circle_24px' (shape)
+                          SvgPicture.string(
+                        _svg_3e8xnw,
+                        allowDrawingOutsideViewBox: true,
+                        fit: BoxFit.fill,
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                  ),
-                ],
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(0.0, 130.0, 168.0, 30.0),
+                      size: Size(168.0, 157.0),
+                      pinLeft: true,
+                      pinRight: true,
+                      pinBottom: true,
+                      fixedHeight: true,
+                      child: Text(
+                        'Save Changes',
+                        style: TextStyle(
+                          fontFamily: 'Helvetica Now Text',
+                          fontSize: 25,
+                          color: const Color(0xff94d3ac),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

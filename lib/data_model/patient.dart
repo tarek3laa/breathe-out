@@ -12,6 +12,7 @@ class Patient {
   String _address;
   String _notes;
   int _fvcWeek;
+
   // ignore: unnecessary_getters_setters
   String get address => _address;
 
@@ -20,11 +21,18 @@ class Patient {
 
   DateTime get registeredDate => _registeredDate;
 
+  Patient.fromJson(data) {}
+
+  static fromJsonArray(data) {
+
+  }
+
   String get notes => _notes;
 
   set notes(String value) {
     _notes = value;
   } // ignore: unnecessary_getters_setters
+
   get ctDate => _ctDate;
 
   // ignore: unnecessary_getters_setters

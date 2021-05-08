@@ -19,9 +19,9 @@ class FinStartPage extends StatelessWidget {
         children: <Widget>[
           background(),
           signIn(context),
-          topBar(),
-          about(context),
-          team(context),
+          //topBar(),
+          //about(context),
+          //team(context),
           signUp(context),
           appName(),
           appNameBar(),

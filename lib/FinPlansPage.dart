@@ -263,23 +263,6 @@ class _FinPlansPageState extends State<FinPlansPage> {
   }
 
   void currentPlanAction() {
-    //todo push json into server
-    var url = '127.0.0.1:5000';
-    /*http.post(
-      Uri.http(url, 'signup'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode({
-        'name': widget.doctor.name,
-        'email': widget.doctor.email,
-        'username': widget.doctor.userName,
-        'phone_number': widget.doctor.phoneNumber,
-        'password': widget.doctor.password,
-        'plan': widget.doctor.plan,
-        'patients': widget.doctor.listOfPatients
-      }),
-    );*/
     pushPage(context, FinAddNewPatient(widget.doctor));
   }
 }

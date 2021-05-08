@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:breathe_out/data_model/patient.dart';
 
 class Doctor {
@@ -10,8 +12,26 @@ class Doctor {
     _plan = false;
   }
 
-  Doctor(userName, password) {
-    print('');
+  Doctor.fromJson(data) {
+    this._name = data['name'];
+    this._email = data['email'];
+    this._userName = data['username'];
+    this._phoneNumber = data['phone_number'];
+    this._password = data['password'];
+    this.plan = data['plan'];
+    this._listOfPatients = data['patients'];
+  }
+
+  toJson() {
+    return jsonEncode(<String, Object>{
+      'name': name,
+      'email': email,
+      'username': userName,
+      'phone_number': phoneNumber,
+      'password': password,
+      'plan': plan,
+      'patients': listOfPatients
+    });
   }
 
   set plan(bool value) {
@@ -31,18 +51,4 @@ class Doctor {
   bool get plan => _plan;
 
   List<Patient> get listOfPatients => _listOfPatients;
-}
-
-bool loginCheck(userName, password) {
-  //check if user name and password are valid
-  return true;
-}
-
-bool emailCheck(email) {
-  //check if email already signed up or not
-  return true;
-}
-
-bool userNameCheck() {
-  return true;
 }

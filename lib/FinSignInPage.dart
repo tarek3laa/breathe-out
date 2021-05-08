@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:breathe_out/FinForgotpasswordPage.dart';
 import 'package:breathe_out/data_model/doctor.dart';
 import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
+import 'package:http/http.dart' as http;
 
 class FinSignInPage extends StatefulWidget {
   @override
@@ -296,11 +299,20 @@ class _FinSignInPageState extends State<FinSignInPage> {
     });
   }
 
-  void signInAction() {
-    if (loginCheck(userName.text, password.text)) {
-      Doctor doctor = Doctor(userName.text, password.text);
-    } else {
-      toast('user name or password are not correct', Colors.red);
+  void signInAction() async {
+    var url = 'http://127.0.0.1:5000/signup';
+    var res = await http.post(
+      url,
+      body: jsonEncode(<String, Object>{
+        'username': userName.text,
+        'password': password.text
+      }),
+    );
+    var js = json.decode(res.body);
+
+    if (js['code'] == 200) {
+      Doctor doctor = Doctor.fromJson(js);
+      print(doctor.name);
     }
   }
 }
