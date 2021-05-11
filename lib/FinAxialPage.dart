@@ -4,6 +4,7 @@ import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:io';
+import 'api/api.dart';
 import 'data_model/patient.dart';
 import 'main_screen/header.dart';
 import 'main_screen/left_side.dart';
@@ -152,45 +153,18 @@ class _FinPatientsFVCPredictionPageState
           appName(),
           addNewPatient(context, widget.doctor),
           details(context, widget.doctor),
-          xRay(),
-          ctScan(context, widget.doctor),
-          export(context,widget.doctor),
+          sagittal(context, widget.doctor),
+          axial(context, widget.doctor),
+          coronal(context, widget.doctor),
 
           Transform.translate(
-            offset: Offset(1109.5, 197.5),
+            offset: Offset(810, 197.5),
             child: SvgPicture.string(
-              _svg_94q8fw,
+              _svg_jjt87m,
               allowDrawingOutsideViewBox: true,
             ),
           ),
-          Transform.translate(
-              offset: Offset(931.0, 847.0),
-              child: GestureDetector(
-                onTap: () => print('a5iran'),
-                child: Container(
-                  width: 308,
-                  height: 89,
-                  child: Center(
-                    child: Text(
-                      'Predict Next FVC',
-                      style: TextStyle(
-                        fontFamily: 'Helvetica Now Text',
-                        fontSize: 31,
-                        color: const Color(0xffffffff),
-                        fontWeight: FontWeight.w500,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(19.0),
-                    color: const Color(0xffccedd2),
-                  ),
-                ),
-              )
-              // Adobe XD layer: 'Predict Next FVC' (group)
 
-              ),
           Transform.translate(
             offset: Offset(634.0, 228.0),
             child:
@@ -209,7 +183,7 @@ class _FinPatientsFVCPredictionPageState
             child:
                 // Adobe XD layer: 'Upload Icon' (group)
                 GestureDetector(
-              onTap: pickImage,
+              onTap: () => pickImage(patient),
               child: SizedBox(
                 width: 172.0,
                 height: 190.0,
@@ -261,163 +235,19 @@ class _FinPatientsFVCPredictionPageState
               ),
             ),
           ),
-          Transform.translate(
-            offset: Offset(1825.0, 36.0),
-            child:
-                // Adobe XD layer: 'Menu Icon' (group)
-                SizedBox(
-              width: 60.0,
-              height: 38.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 60.0, 38.0),
-                    size: Size(60.0, 38.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Menu' (group)
-                        Stack(
-                      children: <Widget>[
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 0.0, 9.6, 38.0),
-                          size: Size(60.0, 38.0),
-                          pinLeft: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          fixedWidth: true,
-                          child:
-                              // Adobe XD layer: 'Dots' (group)
-                              Stack(
-                            children: <Widget>[
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 14.3, 9.6, 9.3),
-                                size: Size(9.6, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Middle Dot' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 28.7, 9.6, 9.3),
-                                size: Size(9.6, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                pinBottom: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Bottom Dot' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 0.0, 9.6, 9.3),
-                                size: Size(9.6, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                pinTop: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Top Dot' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(13.9, 0.0, 46.1, 38.0),
-                          size: Size(60.0, 38.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          child:
-                              // Adobe XD layer: 'Bars' (group)
-                              Stack(
-                            children: <Widget>[
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 14.3, 46.1, 9.3),
-                                size: Size(46.1, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Middle Bar' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 28.7, 46.1, 9.3),
-                                size: Size(46.1, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                pinBottom: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Bottom Bar' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 0.0, 46.1, 9.3),
-                                size: Size(46.1, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                pinTop: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Top Bar' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          menu(context, widget.doctor)
         ],
       ),
     );
   }
 
-  void pickImage() async {
-    FilePickerResult result = await FilePicker.platform.pickFiles(
-        allowMultiple: true, type: FileType.custom, allowedExtensions: ['dcm']);
+  void pickImage(Patient patient) async {
+    FilePickerResult result = await FilePicker.platform
+        .pickFiles(allowMultiple: true, type: FileType.custom);
+    print(result.paths[0]);
+
+    Api().uploadFiles(
+        widget.doctor.userName, result.paths[0], patient.phoneNumber);
   }
 }
 
@@ -433,3 +263,5 @@ const String _svg_94q8fw =
     '<svg viewBox="1109.5 197.5 222.0 1.0" ><path transform="translate(1109.5, 197.5)" d="M 0 0 L 222 0" fill="none" stroke="#9cd6b1" stroke-width="4" stroke-miterlimit="4" stroke-linecap="round" /></svg>';
 const String _svg_y9i5rg =
     '<svg viewBox="1215.4 451.2 50.0 70.0" ><path transform="translate(1204.17, 443.3)" d="M 60.29000854492188 33.24153137207031 C 58.9880256652832 34.48154067993164 56.82672500610352 34.48154067993164 55.49869155883789 33.26583862304688 L 39.64048385620117 18.50724792480469 L 39.64048385620117 74.74552154541016 C 39.64048385620117 76.47180938720703 38.13017654418945 77.88203430175781 36.25531387329102 77.88203430175781 C 34.38044738769531 77.88203430175781 32.87014770507813 76.47181701660156 32.87014770507813 74.74552154541016 L 32.87014770507813 18.50724792480469 L 17.01193237304688 33.29015350341797 C 15.68390369415283 34.5058479309082 13.54864597320557 34.48154067993164 12.22061634063721 33.26583862304688 C 10.91862869262695 32.02582168579102 10.91862869262695 30.05638885498047 12.24665832519531 28.81637763977051 L 33.85966110229492 8.781646728515625 C 33.85966110229492 8.781646728515625 33.85966110229492 8.781646728515625 33.85966110229492 8.781646728515625 C 34.17213821411133 8.514192581176758 34.51065444946289 8.295368194580078 34.92728424072266 8.12516975402832 C 35.34392547607422 7.954973220825195 35.78659820556641 7.882031440734863 36.22927474975586 7.882031440734863 C 37.11463165283203 7.882031440734863 37.94789886474609 8.198112487792969 38.5988883972168 8.781646728515625 L 60.21189498901367 28.81637763977051 C 61.56595993041992 30.00776863098145 61.59199905395508 32.00151443481445 60.29000854492188 33.24153137207031 Z" fill="#9dd6b3" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
+const String _svg_jjt87m =
+    '<svg viewBox="642.5 196.5 96.0 1.0" ><path transform="translate(642.5, 196.5)" d="M 0 0 L 96 0" fill="none" stroke="#9cd6b1" stroke-width="4" stroke-miterlimit="4" stroke-linecap="round" /></svg>';

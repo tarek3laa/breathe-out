@@ -2,7 +2,6 @@ import 'package:breathe_out/FinPatientsDetailsPage.dart';
 import 'package:breathe_out/FinPatientsXRayPage.dart';
 import 'package:breathe_out/FinPlansPage.dart';
 import 'package:breathe_out/FinSignInPage.dart';
-import 'package:breathe_out/FinTeamPage.dart';
 import 'package:flutter/material.dart';
 
 import 'FinStartPage.dart';

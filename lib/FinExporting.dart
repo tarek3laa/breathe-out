@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'data_model/doctor.dart';
 import 'data_model/patient.dart';
+import 'main_screen/tabs.dart';
 
 class FinExporting extends StatefulWidget {
   final Doctor doctor;
@@ -139,60 +140,13 @@ class _FinExportingState extends State<FinExporting> {
             ),
           ),
           patientsShape(),
-
           searchBar(),
-
+          listView.patientsListView(),
           doctorName(''),
           appName(),
           addNewPatient(context, null),
-          Transform.translate(
-            offset: Offset(622.8, 143.0),
-            child: SizedBox(
-              width: 134.0,
-              child: Text(
-                'Details',
-                style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
-                  fontSize: 35,
-                  color: const Color(0x80000000),
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(857.2, 143.0),
-            child: SizedBox(
-              width: 118.0,
-              child: Text(
-                'X-Ray',
-                style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
-                  fontSize: 35,
-                  color: const Color(0x80000000),
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(1137.0, 143.0),
-            child: SizedBox(
-              width: 168.0,
-              child: Text(
-                'CT-Scan',
-                style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
-                  fontSize: 35,
-                  color: const Color(0x80000000),
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+          details(context, widget.doctor),
+          axial(context, widget.doctor),
           Transform.translate(
             offset: Offset(1474.5, 197.5),
             child: SvgPicture.string(
@@ -200,171 +154,8 @@ class _FinExportingState extends State<FinExporting> {
               allowDrawingOutsideViewBox: true,
             ),
           ),
-          Transform.translate(
-            offset: Offset(1825.0, 36.0),
-            child:
-                // Adobe XD layer: 'Menu Icon' (group)
-                SizedBox(
-              width: 60.0,
-              height: 38.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 60.0, 38.0),
-                    size: Size(60.0, 38.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child:
-                        // Adobe XD layer: 'Menu' (group)
-                        Stack(
-                      children: <Widget>[
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 0.0, 9.6, 38.0),
-                          size: Size(60.0, 38.0),
-                          pinLeft: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          fixedWidth: true,
-                          child:
-                              // Adobe XD layer: 'Dots' (group)
-                              Stack(
-                            children: <Widget>[
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 14.3, 9.6, 9.3),
-                                size: Size(9.6, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Middle Dot' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 28.7, 9.6, 9.3),
-                                size: Size(9.6, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                pinBottom: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Bottom Dot' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 0.0, 9.6, 9.3),
-                                size: Size(9.6, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                pinTop: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Top Dot' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(13.9, 0.0, 46.1, 38.0),
-                          size: Size(60.0, 38.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          child:
-                              // Adobe XD layer: 'Bars' (group)
-                              Stack(
-                            children: <Widget>[
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 14.3, 46.1, 9.3),
-                                size: Size(46.1, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Middle Bar' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 28.7, 46.1, 9.3),
-                                size: Size(46.1, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                pinBottom: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Bottom Bar' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                              Pinned.fromSize(
-                                bounds: Rect.fromLTWH(0.0, 0.0, 46.1, 9.3),
-                                size: Size(46.1, 38.0),
-                                pinLeft: true,
-                                pinRight: true,
-                                pinTop: true,
-                                fixedHeight: true,
-                                child:
-                                    // Adobe XD layer: 'Top Bar' (shape)
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(1.01),
-                                    color: const Color(0xff4d4d4d),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(1447.0, 143.0),
-            child: SizedBox(
-              width: 132.0,
-              child: Text(
-                'Export',
-                style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
-                  fontSize: 35,
-                  color: const Color(0xff000000),
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+          menu(context, widget.doctor),
+          sagittal(context, widget.doctor),
           Transform.translate(
             offset: Offset(690.0, 273.0),
             child: Container(
@@ -393,41 +184,44 @@ class _FinExportingState extends State<FinExporting> {
                     fixedHeight: true,
                     child:
                         // Adobe XD layer: 'Continue' (group)
-                        Stack(
-                      children: <Widget>[
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 0.0, 362.0, 93.0),
-                          size: Size(362.0, 93.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          child:
-                              // Adobe XD layer: 'Proceed Button' (shape)
-                              Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4.0),
-                              color: const Color(0xff519872),
+                        GestureDetector(
+                      onTap: () => print('c'),
+                      child: Stack(
+                        children: <Widget>[
+                          Pinned.fromSize(
+                            bounds: Rect.fromLTWH(0.0, 0.0, 362.0, 93.0),
+                            size: Size(362.0, 93.0),
+                            pinLeft: true,
+                            pinRight: true,
+                            pinTop: true,
+                            pinBottom: true,
+                            child:
+                                // Adobe XD layer: 'Proceed Button' (shape)
+                                Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4.0),
+                                color: const Color(0xff519872),
+                              ),
                             ),
                           ),
-                        ),
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(101.0, 28.0, 149.0, 35.0),
-                          size: Size(362.0, 93.0),
-                          fixedWidth: true,
-                          fixedHeight: true,
-                          child: Text(
-                            'Continue',
-                            style: TextStyle(
-                              fontFamily: 'Helvetica Now Text',
-                              fontSize: 35,
-                              color: const Color(0xffffffff),
-                              fontWeight: FontWeight.w500,
+                          Pinned.fromSize(
+                            bounds: Rect.fromLTWH(101.0, 28.0, 149.0, 35.0),
+                            size: Size(362.0, 93.0),
+                            fixedWidth: true,
+                            fixedHeight: true,
+                            child: Text(
+                              'Continue',
+                              style: TextStyle(
+                                fontFamily: 'Helvetica Now Text',
+                                fontSize: 35,
+                                color: const Color(0xffffffff),
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.left,
                             ),
-                            textAlign: TextAlign.left,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   Pinned.fromSize(

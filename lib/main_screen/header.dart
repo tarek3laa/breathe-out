@@ -1,10 +1,12 @@
 import 'package:adobe_xd/adobe_xd.dart';
-import 'package:breathe_out/FinMenu.dart';
 import 'package:breathe_out/FinProfilePage.dart';
+import 'package:breathe_out/FinSignInPage.dart';
+import 'package:breathe_out/FinStartPage.dart';
 import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kumi_popup_window/kumi_popup_window.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 headerGreenShapes() {
   return Transform.translate(
@@ -68,7 +70,7 @@ doctorName(name) {
     child: Text(
       name,
       style: TextStyle(
-        fontFamily: 'Helvetica Now Text',
+        fontFamily: 'HelveticaNowText-Medium',
         fontSize: 35,
         color: const Color(0xff727272),
         fontWeight: FontWeight.w500,
@@ -84,7 +86,7 @@ appName() {
     child: Text(
       'Breathe Out',
       style: TextStyle(
-        fontFamily: 'Helvetica Now Text',
+        fontFamily: 'HelveticaNowText-Medium',
         fontSize: 35,
         color: const Color(0xff727272),
         fontWeight: FontWeight.w500,
@@ -147,37 +149,17 @@ void menuItems(context, doctor) {
             ],
           ),
           width: 403.0,
-          height: 200.0,
+          height: 100.0,
           key: GlobalKey(),
           child: Column(
             children: [
               Padding(
                 padding: EdgeInsets.all(20),
                 child: GestureDetector(
-                  onTap: () => pushPage(context, FinProfilePage(doctor)),
-                  child: Row(
-                    children: [
-                      Container(
-                        child: Icon(
-                          Icons.account_circle_outlined,
-                          size: 50,
-                        ),
-                        padding: EdgeInsets.only(right: 20),
-                      ),
-                      Container(
-                        child: Text(
-                          'Account',
-                          style: TextStyle(fontSize: 30),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: GestureDetector(
-                  onTap: () => print('logout'),
+                  onTap: () {
+                    pushPage(context, FinStartPage());
+                    sh();
+                  },
                   child: Row(
                     children: [
                       Container(
@@ -189,20 +171,25 @@ void menuItems(context, doctor) {
                       ),
                       Container(
                         child: Text(
-                          'Logout',
+                          'logout',
                           style: TextStyle(fontSize: 30),
                         ),
                       )
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
       );
     },
   );
+}
+
+sh() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setBool("checkbox", false);
 }
 
 const String _svg_puddb1 =

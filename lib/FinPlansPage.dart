@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:breathe_out/FinAddinganewpatient.dart';
+import 'package:breathe_out/FinPlanPayment.dart';
 import 'package:breathe_out/data_model/doctor.dart';
 import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -259,7 +260,7 @@ class _FinPlansPageState extends State<FinPlansPage> {
   }
 
   void joinAction() {
-    print('hello');
+    pushPage(context, FinPlanPayment());
   }
 
   void currentPlanAction() {

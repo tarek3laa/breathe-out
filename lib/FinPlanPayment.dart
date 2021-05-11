@@ -1,11 +1,24 @@
+import 'package:breathe_out/paymment/checkout.dart';
+import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class FinPlanPayment extends StatelessWidget {
-  FinPlanPayment({
-    Key key,
-  }) : super(key: key);
+class FinPlanPayment extends StatefulWidget {
+  @override
+  _FinPlanPaymentState createState() {
+    // TODO: implement createState
+    return _FinPlanPaymentState();
+  }
+}
+
+class _FinPlanPaymentState extends State<FinPlanPayment> {
+  final name = TextEditingController();
+  final number = TextEditingController();
+  final cvv = TextEditingController();
+  final year = TextEditingController();
+  final month = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -600,6 +613,7 @@ class FinPlanPayment extends StatelessWidget {
                           child:
                               // Adobe XD layer: 'First, last name' (shape)
                               Container(
+                            child: textField(name, false, '', 20.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.0),
                               color: const Color(0xfff4f4f4),
@@ -662,6 +676,7 @@ class FinPlanPayment extends StatelessWidget {
                           child:
                               // Adobe XD layer: 'First, last name' (shape)
                               Container(
+                            child: textField(number, false, '', 20.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.0),
                               color: const Color(0xfff4f4f4),
@@ -722,6 +737,7 @@ class FinPlanPayment extends StatelessWidget {
                           child:
                               // Adobe XD layer: 'First, last name' (shape)
                               Container(
+                            child: textField(month, false, '', 20.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.0),
                               color: const Color(0xfff4f4f4),
@@ -738,6 +754,7 @@ class FinPlanPayment extends StatelessWidget {
                           child:
                               // Adobe XD layer: 'First, last name' (shape)
                               Container(
+                            child: textField(year, false, '', 20.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.0),
                               color: const Color(0xfff4f4f4),
@@ -833,6 +850,7 @@ class FinPlanPayment extends StatelessWidget {
                           child:
                               // Adobe XD layer: 'First, last name' (shape)
                               Container(
+                            child: textField(cvv, false, '', 20.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4.0),
                               color: const Color(0xfff4f4f4),
@@ -916,41 +934,44 @@ class FinPlanPayment extends StatelessWidget {
                     fixedHeight: true,
                     child:
                         // Adobe XD layer: 'Proceed' (group)
-                        Stack(
-                      children: <Widget>[
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(0.0, 0.0, 252.0, 66.0),
-                          size: Size(252.0, 66.0),
-                          pinLeft: true,
-                          pinRight: true,
-                          pinTop: true,
-                          pinBottom: true,
-                          child:
-                              // Adobe XD layer: 'Proceed Button' (shape)
-                              Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4.0),
-                              color: const Color(0xff519872),
+                        GestureDetector(
+                      onTap: Proceed,
+                      child: Stack(
+                        children: <Widget>[
+                          Pinned.fromSize(
+                            bounds: Rect.fromLTWH(0.0, 0.0, 252.0, 66.0),
+                            size: Size(252.0, 66.0),
+                            pinLeft: true,
+                            pinRight: true,
+                            pinTop: true,
+                            pinBottom: true,
+                            child:
+                                // Adobe XD layer: 'Proceed Button' (shape)
+                                Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4.0),
+                                color: const Color(0xff519872),
+                              ),
                             ),
                           ),
-                        ),
-                        Pinned.fromSize(
-                          bounds: Rect.fromLTWH(69.0, 19.0, 114.0, 29.0),
-                          size: Size(252.0, 66.0),
-                          fixedWidth: true,
-                          fixedHeight: true,
-                          child: Text(
-                            'Proceed',
-                            style: TextStyle(
-                              fontFamily: 'Helvetica Now Text',
-                              fontSize: 29,
-                              color: const Color(0xffffffff),
-                              fontWeight: FontWeight.w500,
+                          Pinned.fromSize(
+                            bounds: Rect.fromLTWH(69.0, 19.0, 114.0, 29.0),
+                            size: Size(252.0, 66.0),
+                            fixedWidth: true,
+                            fixedHeight: true,
+                            child: Text(
+                              'Proceed',
+                              style: TextStyle(
+                                fontFamily: 'Helvetica Now Text',
+                                fontSize: 29,
+                                color: const Color(0xffffffff),
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -959,14 +980,25 @@ class FinPlanPayment extends StatelessWidget {
           ),
           Transform.translate(
             offset: Offset(1555.0, 200.0),
-            child: SvgPicture.string(
-              _svg_bsbwav,
-              allowDrawingOutsideViewBox: true,
+            child: GestureDetector(
+              onTap: () => popPage(context),
+              child: SvgPicture.string(
+                _svg_bsbwav,
+                allowDrawingOutsideViewBox: true,
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  void Proceed() {
+    CheckOut checkOut = CheckOut();
+    var x = checkOut.makePayment(
+        PaymentCard('4484070000035519', 12, 2025, '257'), 2500);
+
+    print(x);
   }
 }
 

@@ -1,10 +1,11 @@
-import 'package:breathe_out/FinAboutPage.dart';
 import 'package:breathe_out/FinSignInPage.dart';
 import 'package:breathe_out/FinSignUpPage.dart';
-import 'package:breathe_out/FinTeamPage.dart';
 import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'api/api.dart';
 
 class FinStartPage extends StatelessWidget {
   FinStartPage({
@@ -13,19 +14,16 @@ class FinStartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    sh(context);
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
       body: Stack(
         children: <Widget>[
           background(),
           signIn(context),
-          //topBar(),
-          //about(context),
-          //team(context),
           signUp(context),
           appName(),
           appNameBar(),
-          appDescription()
         ],
       ),
     );
@@ -33,11 +31,11 @@ class FinStartPage extends StatelessWidget {
 
   appName() {
     return Transform.translate(
-      offset: Offset(224.0, 222.0),
+      offset: Offset(224.0, 350.0),
       child: Text(
         'Breathe out',
         style: TextStyle(
-          fontFamily: 'Helvetica Now Display',
+          fontFamily: 'HelveticaNowDisplay-ExtraBold',
           fontSize: 54,
           color: const Color(0xff000000),
           fontWeight: FontWeight.w700,
@@ -49,7 +47,7 @@ class FinStartPage extends StatelessWidget {
 
   appNameBar() {
     return Transform.translate(
-      offset: Offset(224.0, 291.0),
+      offset: Offset(224.0, 420.0),
       child:
           // Adobe XD layer: 'App Name Bar' (shape)
           Container(
@@ -125,18 +123,20 @@ class FinStartPage extends StatelessWidget {
               ),
             ),
             Pinned.fromSize(
-              bounds: Rect.fromLTWH(83.0, 26.0, 175.0, 59.0),
+              bounds: Rect.fromLTWH(83.0, 26.0, 175.0, 65.0),
               size: Size(342.0, 110.0),
               fixedWidth: true,
               fixedHeight: true,
-              child: Text(
-                'Sign in',
-                style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
-                  fontSize: 54,
-                  color: const Color(0xffffffff),
+              child: Center(
+                child: Text(
+                  'Sign in',
+                  style: TextStyle(
+                    fontFamily: 'HelveticaNowText-Regular',
+                    fontSize: 50,
+                    color: const Color(0xffffffff),
+                  ),
+                  textAlign: TextAlign.left,
                 ),
-                textAlign: TextAlign.left,
               ),
             ),
           ],
@@ -171,42 +171,6 @@ class FinStartPage extends StatelessWidget {
     );
   }
 
-  about(context) {
-    return Transform.translate(
-      offset: Offset(883.0, 61.0),
-      child: GestureDetector(
-        onTap: () => pushPage(context, FinAboutPage()),
-        child: Text(
-          'about',
-          style: TextStyle(
-            fontFamily: 'Helvetica Now Text',
-            fontSize: 40,
-            color: const Color(0xff000000),
-          ),
-          textAlign: TextAlign.left,
-        ),
-      ),
-    );
-  }
-
-  team(context) {
-    return Transform.translate(
-      offset: Offset(1110.0, 61.0),
-      child: GestureDetector(
-        onTap: () => pushPage(context, FinTeamPage()),
-        child: Text(
-          'team',
-          style: TextStyle(
-            fontFamily: 'Helvetica Now Text',
-            fontSize: 40,
-            color: const Color(0xff000000),
-          ),
-          textAlign: TextAlign.left,
-        ),
-      ),
-    );
-  }
-
   signUpButton(action) {
     return GestureDetector(
       onTap: action,
@@ -236,8 +200,8 @@ class FinStartPage extends StatelessWidget {
             child: Text(
               'Sign up',
               style: TextStyle(
-                fontFamily: 'Helvetica Now Text',
-                fontSize: 45,
+                fontFamily: 'HelveticaNowText-Regular',
+                fontSize: 40,
                 color: const Color(0xffffffff),
               ),
               textAlign: TextAlign.left,
@@ -258,5 +222,15 @@ class FinStartPage extends StatelessWidget {
               height: 88.0,
               child: signUpButton(() => pushPage(context, FinSignUpPage()))),
     );
+  }
+
+  void sh(context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print('sh');
+    if ((prefs.getBool("checkbox") ?? false)) {
+      print('tttttt');
+      Api().signIn(
+          context, prefs.getString("username"), prefs.getString("password"));
+    }
   }
 }

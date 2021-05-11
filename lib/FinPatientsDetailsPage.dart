@@ -16,6 +16,7 @@ class FinPatientsDetailsPage extends StatefulWidget {
 
   @override
   _FinPatientsDetailsPageState createState() {
+    print(doctor.listOfPatients.length);
     return _FinPatientsDetailsPageState(doctor);
   }
 }
@@ -135,15 +136,15 @@ class _FinPatientsDetailsPageState extends State<FinPatientsDetailsPage> {
           doctorShape(),
           patientsShape(),
 
-          searchBar(),
+          //searchBar(),
           listView.patientsListView(),
           doctorName(widget.doctor.name),
           appName(),
           addNewPatient(context, widget.doctor),
           details(context, widget.doctor),
-          xRay(),
-          ctScan(context, widget.doctor),
-          export(context, widget.doctor),
+          sagittal(context, widget.doctor),
+          axial(context, widget.doctor),
+          coronal(context, widget.doctor),
           Transform.translate(
             offset: Offset(600.0, 290.0),
             child:

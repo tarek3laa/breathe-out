@@ -8,8 +8,7 @@ import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:http/http.dart' as http;
-
+import 'api/api.dart';
 import 'data_model/patient.dart';
 
 class FinSignUpPage extends StatefulWidget {
@@ -231,7 +230,7 @@ class _FinSignUpPageState extends State<FinSignUpPage> {
       child: Text(
         'Sign Up',
         style: TextStyle(
-          fontFamily: 'Helvetica Now Text',
+          fontFamily: 'HelveticaNowText-Bold',
           fontSize: 60,
           color: const Color(0xff474a56),
           fontWeight: FontWeight.w700,
@@ -381,7 +380,7 @@ class _FinSignUpPageState extends State<FinSignUpPage> {
               ),
             ),
             Pinned.fromSize(
-              bounds: Rect.fromLTWH(50.0, 29.0, 316.0, 43.0),
+              bounds: Rect.fromLTWH(50.0, 29.0, 400.0, 50.0),
               size: Size(416.0, 102.0),
               pinLeft: true,
               pinRight: true,
@@ -389,7 +388,7 @@ class _FinSignUpPageState extends State<FinSignUpPage> {
               child: Text(
                 'Create Account',
                 style: TextStyle(
-                  fontFamily: 'Helvetica Now Text',
+                  fontFamily: 'HelveticaNowText-Medium',
                   fontSize: 43,
                   color: const Color(0xffffffff),
                   fontWeight: FontWeight.w500,
@@ -402,19 +401,18 @@ class _FinSignUpPageState extends State<FinSignUpPage> {
         onTap: createAccountAction);
   }
 
-  void createAccountAction() async {
-    Doctor doctor = Doctor.newDoctor(
-        name.text, email.text, userName.text, phone.text, password.text, []);
-    var url = 'http://127.0.0.1:5000/signup';
+  void createAccountAction() {
+    print('hi');
+    bool emailValid = RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(email.text);
 
-    var r = await http.post(url, body: doctor.toJson());
-    print(r.body);
-    var xd = await json.decode(r.body);
-    print(xd);
-    if (xd['code'] == 200)
-      pushPage(context, FinPlansPage(doctor));
-    else {
-      toast(xd['msg'], context);
+    if (emailValid) {
+      Doctor doctor = Doctor.newDoctor(
+          name.text, email.text, userName.text, phone.text, password.text, []);
+      Api.addingNewDoctor(doctor,context);
+    } else {
+      toast('Not a valid email address', context);
     }
   }
 }

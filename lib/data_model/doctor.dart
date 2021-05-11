@@ -19,7 +19,7 @@ class Doctor {
     this._phoneNumber = data['phone_number'];
     this._password = data['password'];
     this.plan = data['plan'];
-    this._listOfPatients = data['patients'];
+    this._listOfPatients = Patient.fromJsonArray(data['patients']);
   }
 
   toJson() {

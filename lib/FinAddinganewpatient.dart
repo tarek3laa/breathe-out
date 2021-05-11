@@ -9,6 +9,8 @@ import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
+import 'api/api.dart';
+
 class FinAddNewPatient extends StatefulWidget {
   final Doctor doctor;
 
@@ -330,7 +332,9 @@ class _FinAddNewPatientState extends State<FinAddNewPatient> {
                       value: value,
                       child: Text(
                         value,
-                        style: TextStyle(fontSize: 25.0),
+                        style: TextStyle(
+                            fontSize: 25.0,
+                            fontFamily: 'HelveticaNowText-Regular'),
                       ),
                     );
                   }).toList(),
@@ -748,7 +752,7 @@ class _FinAddNewPatientState extends State<FinAddNewPatient> {
         statues,
         gender,
         streetAddress.text,
-        DateTime.now(),
+        DateTime.now().toString(),
         int.parse(age.text));
     patient.notes = notes.text;
     if (firstFvc.text.isNotEmpty && this.date != null) {
@@ -758,6 +762,7 @@ class _FinAddNewPatientState extends State<FinAddNewPatient> {
 
     widget.doctor.listOfPatients.add(patient);
     //todo push patient into api
+    Api().addingNewPatient(widget.doctor.userName, patient);
     pushPage(context, FinPatientsDetailsPage(widget.doctor));
   }
 }

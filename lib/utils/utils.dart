@@ -12,15 +12,12 @@ void toast(msg, context) {
   showPopupWindow(
     context,
     gravity: KumiPopupGravity.center,
-    //curve: Curves.elasticOut,
     bgColor: Colors.grey.withOpacity(0.5),
     clickOutDismiss: true,
     clickBackDismiss: true,
     customAnimation: false,
     customPop: false,
     customPage: false,
-    //targetRenderBox: (btnKey.currentContext.findRenderObject() as RenderBox),
-    //needSafeDisplay: true,
     underStatusBar: false,
     underAppBar: true,
     offsetX: 0,
@@ -47,7 +44,8 @@ void toast(msg, context) {
 textField(controller, secure, hint, fontSize, {maxLines = 1}) {
   return new TextFormField(
       maxLines: maxLines,
-      style: TextStyle(fontSize: fontSize),
+      style:
+          TextStyle(fontSize: fontSize, fontFamily: 'HelveticaNowText-Regular'),
       obscureText: secure,
       controller: controller,
       decoration: InputDecoration(

@@ -1,11 +1,15 @@
 import 'dart:convert';
 
-import 'package:breathe_out/FinForgotpasswordPage.dart';
+import 'package:breathe_out/FinAddinganewpatient.dart';
 import 'package:breathe_out/data_model/doctor.dart';
 import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'FinPatientsDetailsPage.dart';
+import 'api/api.dart';
+import 'data_model/patient.dart';
 
 class FinSignInPage extends StatefulWidget {
   @override
@@ -28,7 +32,7 @@ class _FinSignInPageState extends State<FinSignInPage> {
       body: Stack(
         children: <Widget>[
           background(), pageName(), userNameGroup(), passwordGroup(),
-          forgotPassword(),
+
           rememberMe(),
           closeButton(context, false), //close btn
           checkBox(), //check box
@@ -267,52 +271,27 @@ class _FinSignInPageState extends State<FinSignInPage> {
     );
   }
 
-  forgotPassword() {
-    return Transform.translate(
-        offset: Offset(77.0, 816.0),
-        child: GestureDetector(
-          onTap: forgotPasswordAction,
-          child: Text(
-            'Forgot Password ?',
-            style: TextStyle(
-              fontFamily: 'Helvetica Now Text',
-              fontSize: 41,
-              color: const Color(0xff898989),
-            ),
-            textAlign: TextAlign.left,
-          ),
-        ));
-  }
-
-  //*****************************************************************//
-
-  void forgotPasswordAction() {
-    pushPage(context, FinForgotPasswordPage());
-  }
-
   void checkBoxAction() {
     setState(() {
-      if (checkBoxColor == normal)
+      if (checkBoxColor == normal) {
         checkBoxColor = checked;
-      else
+      } else {
         checkBoxColor = normal;
+      }
     });
   }
 
-  void signInAction() async {
-    var url = 'http://127.0.0.1:5000/signup';
-    var res = await http.post(
-      url,
-      body: jsonEncode(<String, Object>{
-        'username': userName.text,
-        'password': password.text
-      }),
-    );
-    var js = json.decode(res.body);
+  sh() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("checkbox", true);
+    await prefs.setString("username", userName.text);
+    await prefs.setString("password", password.text);
+  }
 
-    if (js['code'] == 200) {
-      Doctor doctor = Doctor.fromJson(js);
-      print(doctor.name);
+  void signInAction() async {
+    if (checkBoxColor == checked) {
+      sh();
     }
+    Api().signIn(context, userName.text, password.text);
   }
 }
