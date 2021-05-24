@@ -1,13 +1,35 @@
+import 'package:breathe_out/data_model/doctor.dart';
+import 'package:breathe_out/data_model/patient.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class FinPatientsFVCPredictionPage2 extends StatelessWidget {
-  FinPatientsFVCPredictionPage2({
-    Key key,
-  }) : super(key: key);
+import 'api/api.dart';
+
+class FinPatientsFVCPredictionPage2 extends StatefulWidget {
+  final username, phone;
+
+  @override
+  _FinPatientsFVCPredictionPage2State createState() {
+    return _FinPatientsFVCPredictionPage2State();
+  }
+
+  FinPatientsFVCPredictionPage2(this.username, this.phone);
+}
+
+class _FinPatientsFVCPredictionPage2State
+    extends State<FinPatientsFVCPredictionPage2> {
+  List<dynamic> list;
+  var flag = false;
+
   @override
   Widget build(BuildContext context) {
+    if (!flag) {
+      Api().predict(widget.username, widget.phone).then((value) => setState(() {
+            list = value;
+          }));
+      flag = true;
+    }
     return Scaffold(
       backgroundColor: const Color(0xfff6f6f6),
       body: Stack(
@@ -780,6 +802,7 @@ class FinPatientsFVCPredictionPage2 extends StatelessWidget {
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
+                      child: Center(child: Text((list != null) ? list[0].toString() : '0')),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -827,6 +850,7 @@ class FinPatientsFVCPredictionPage2 extends StatelessWidget {
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
+                      child: Text((list != null) ? list[1].toString() : '0'),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -874,6 +898,7 @@ class FinPatientsFVCPredictionPage2 extends StatelessWidget {
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
+                      child: Text((list != null) ? list[2].toString() : '0'),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),

@@ -1,6 +1,7 @@
 import 'package:breathe_out/FinExporting.dart';
 import 'package:breathe_out/FinPatientsDetailsPage.dart';
 import 'package:breathe_out/FinAxialPage.dart';
+import 'package:breathe_out/FinPatientsFVCPredictionPage2.dart';
 import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +36,8 @@ coronal(context, doctor) {
   return Transform.translate(
     offset: Offset(980, 143.0),
     child: GestureDetector(
-      onTap: () => print('2'),
+      onTap: () =>
+          pushPage(context, FinPatientsFVCPredictionPage(doctor, Tabs.Coronal)),
       child: SizedBox(
         width: 130.0,
         child: Text(
@@ -43,7 +45,6 @@ coronal(context, doctor) {
           style: TextStyle(
             fontFamily: 'Helvetica Now Text',
             fontSize: 35,
-            color: const Color(0x80000000),
             fontWeight: FontWeight.w500,
           ),
           textAlign: TextAlign.center,
@@ -57,7 +58,8 @@ axial(context, doctor) {
   return Transform.translate(
     offset: Offset(780, 143.0),
     child: GestureDetector(
-      onTap: () => pushPage(context, FinPatientsFVCPredictionPage(doctor)),
+      onTap: () =>
+          pushPage(context, FinPatientsFVCPredictionPage(doctor, Tabs.Axial)),
       child: SizedBox(
         width: 168.0,
         child: Text(
@@ -65,10 +67,6 @@ axial(context, doctor) {
           style: TextStyle(
             fontFamily: 'Helvetica Now Text',
             fontSize: 35,
-            color: Color(
-                (context.widget.runtimeType == FinPatientsFVCPredictionPage)
-                    ? selectedTap
-                    : normalTap),
             fontWeight: FontWeight.w500,
           ),
           textAlign: TextAlign.center,
@@ -82,7 +80,8 @@ sagittal(context, doctor) {
   return Transform.translate(
     offset: Offset(1190.0, 143.0),
     child: GestureDetector(
-      onTap: () => pushPage(context, FinExporting(doctor)),
+      onTap: () => pushPage(
+          context, FinPatientsFVCPredictionPage(doctor, Tabs.Sagittal)),
       child: SizedBox(
         width: 132.0,
         child: Text(
@@ -90,7 +89,28 @@ sagittal(context, doctor) {
           style: TextStyle(
             fontFamily: 'Helvetica Now Text',
             fontSize: 35,
-            color: const Color(0x80000000),
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    ),
+  );
+}
+
+predict(context, username, phone) {
+  return Transform.translate(
+    offset: Offset(1400.0, 143.0),
+    child: GestureDetector(
+      onTap: () =>
+          pushPage(context, FinPatientsFVCPredictionPage2(username, phone)),
+      child: SizedBox(
+        width: 132.0,
+        child: Text(
+          'predict',
+          style: TextStyle(
+            fontFamily: 'Helvetica Now Text',
+            fontSize: 35,
             fontWeight: FontWeight.w500,
           ),
           textAlign: TextAlign.center,

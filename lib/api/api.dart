@@ -25,14 +25,18 @@ class Api {
     }
   }
 
-  Future<void> uploadFiles(username, filepath, phoneNumber) async {
+  uploadFiles(username, filepath, phoneNumber) {
     var request = http.MultipartRequest(
         'POST', Uri.parse(url + "upload_files/$username/$phoneNumber"));
     request.files.add(http.MultipartFile(filepath,
         File(filepath).readAsBytes().asStream(), File(filepath).lengthSync(),
         filename: filepath.split("/").last));
 
-    await request.send();
+    request.send();
+  }
+
+  mkDir(username, phoneNumber) {
+    http.get(url + 'mk_dir/$username/$phoneNumber');
   }
 
   Future<void> addingNewPatient(username, Patient patient) async {
@@ -55,5 +59,17 @@ class Api {
       Doctor doctor = Doctor.fromJson(js['content']);
       pushPage(context, FinPatientsDetailsPage(doctor));
     }
+  }
+
+  void convert(userName, phoneNumber) {
+    http.get(url + 'convert/$userName/$phoneNumber');
+  }
+
+  Future<List> predict(userName, phoneNumber) async {
+    http.Response response =
+        await http.get(url + 'predict/$userName/$phoneNumber');
+    var xd = await json.decode(response.body);
+
+    return xd['content'];
   }
 }

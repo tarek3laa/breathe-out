@@ -1,8 +1,12 @@
+import 'package:breathe_out/FinPlansPage.dart';
 import 'package:breathe_out/data_model/doctor.dart';
+import 'package:breathe_out/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/foundation.dart';
+import 'package:image_viewer/image_viewer.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 import 'dart:io';
 import 'api/api.dart';
 import 'data_model/patient.dart';
@@ -10,11 +14,14 @@ import 'main_screen/header.dart';
 import 'main_screen/left_side.dart';
 import 'main_screen/tabs.dart';
 import 'package:file_picker/file_picker.dart';
+import 'dart:io';
+import 'package:photo_view/photo_view.dart';
 
 class FinPatientsFVCPredictionPage extends StatefulWidget {
   final Doctor doctor;
+  final Tabs tabs;
 
-  FinPatientsFVCPredictionPage(this.doctor);
+  FinPatientsFVCPredictionPage(this.doctor, this.tabs);
 
   @override
   _FinPatientsFVCPredictionPageState createState() {
@@ -25,49 +32,102 @@ class FinPatientsFVCPredictionPage extends StatefulWidget {
 class _FinPatientsFVCPredictionPageState
     extends State<FinPatientsFVCPredictionPage> {
   List<Patient> patients;
+  Patient patient;
 
   _FinPatientsFVCPredictionPageState(Doctor doctor) {
     patients = doctor.listOfPatients;
   }
 
+  List contents;
+  var index = 0;
+  var c = false;
+
+  getContent() {
+    var dir;
+    try {
+      try {
+        Api().convert(widget.doctor.userName, patient.phoneNumber);
+      } catch (e) {}
+      c = false;
+      if (widget.tabs == Tabs.Axial)
+        dir = new Directory(
+            '/home/tarek/AndroidStudioProjects/breathe-out/assets/images/${widget.doctor.userName}/${patient.phoneNumber}/axial');
+      else if (widget.tabs == Tabs.Coronal)
+        dir = new Directory(
+            '/home/tarek/AndroidStudioProjects/breathe-out/assets/images/${widget.doctor.userName}/${patient.phoneNumber}/coronal');
+      else
+        dir = new Directory(
+            '/home/tarek/AndroidStudioProjects/breathe-out/assets/images/${widget.doctor.userName}/${patient.phoneNumber}/sagittal');
+      if (contents == null || contents.length == 0) contents = dir.listSync();
+      for (var fileOrDir in contents) {
+        print(fileOrDir.path);
+      }
+    } catch (e) {
+      c = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final listView = PatientsListView(context, patients, setState);
-    Patient patient = listView.currentPatient;
-    return Scaffold(
-      backgroundColor: const Color(0xfff6f6f6),
-      body: Stack(
-        children: <Widget>[
-          Transform.translate(
-            offset: Offset(-8.0, 110.0),
-            child:
-                // Adobe XD layer: 'FVC Background' (shape)
-                Container(
-              width: 1943.0,
-              height: 991.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage(
-                      'assets/images/PD_Xray_CT_Export_addnewPatient Background.png'),
-                  fit: BoxFit.fill,
+    patient = listView.currentPatient;
+    double X = (widget.tabs == Tabs.Axial)
+        ? 810
+        : (widget.tabs == Tabs.Coronal)
+            ? 1000
+            : 1200;
+    getContent();
+    if (c)
+      return Scaffold(
+        backgroundColor: const Color(0xfff6f6f6),
+        body: Stack(
+          children: <Widget>[
+            Transform.translate(
+              offset: Offset(-8.0, 110.0),
+              child:
+                  // Adobe XD layer: 'FVC Background' (shape)
+                  Container(
+                width: 1943.0,
+                height: 991.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: const AssetImage(
+                        'assets/images/PD_Xray_CT_Export_addnewPatient Background.png'),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
             ),
-          ),
-          Transform.translate(
-            offset: Offset(0.0, 110.0),
-            child:
-                // Adobe XD layer: 'Right Side' (shape)
-                Container(
-              width: 560.0,
-              height: 970.0,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment(0.0, -1.0),
-                  end: Alignment(0.0, 1.0),
-                  colors: [const Color(0xff94d3ac), const Color(0xffccedd2)],
-                  stops: [0.0, 1.0],
+            Transform.translate(
+              offset: Offset(0.0, 110.0),
+              child:
+                  // Adobe XD layer: 'Right Side' (shape)
+                  Container(
+                width: 560.0,
+                height: 970.0,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment(0.0, -1.0),
+                    end: Alignment(0.0, 1.0),
+                    colors: [const Color(0xff94d3ac), const Color(0xffccedd2)],
+                    stops: [0.0, 1.0],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0x29000000),
+                      offset: Offset(0, 3),
+                      blurRadius: 6,
+                    ),
+                  ],
                 ),
+              ),
+            ),
+            // Adobe XD layer: 'Header' (shape)
+            Container(
+              width: 1920.0,
+              height: 110.0,
+              decoration: BoxDecoration(
+                color: const Color(0xffffffff),
                 boxShadow: [
                   BoxShadow(
                     color: const Color(0x29000000),
@@ -77,177 +137,348 @@ class _FinPatientsFVCPredictionPageState
                 ],
               ),
             ),
-          ),
-          // Adobe XD layer: 'Header' (shape)
-          Container(
-            width: 1920.0,
-            height: 110.0,
-            decoration: BoxDecoration(
-              color: const Color(0xffffffff),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0x29000000),
-                  offset: Offset(0, 3),
-                  blurRadius: 6,
-                ),
-              ],
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(281.0, 0.0),
-            child:
-                // Adobe XD layer: 'Header Green Shapes' (group)
-                SizedBox(
-              width: 799.0,
-              height: 92.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(433.0, 0.0, 366.4, 91.9),
-                    size: Size(799.4, 91.9),
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    fixedWidth: true,
-                    child:
-                        // Adobe XD layer: 'Green Header Right' (shape)
-                        SvgPicture.string(
-                      _svg_puddb1,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 309.3, 85.6),
-                    size: Size(799.4, 91.9),
-                    pinLeft: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    fixedWidth: true,
-                    child:
-                        // Adobe XD layer: 'Green Header Left' (shape)
-                        SvgPicture.string(
-                      _svg_27tc3n,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(1070.0, 26.0),
-            child: SvgPicture.string(
-              _svg_k4y6ez,
-              allowDrawingOutsideViewBox: true,
-            ),
-          ),
-
-          doctorShape(),
-          patientsShape(),
-
-          searchBar(),
-          listView.patientsListView(),
-          doctorName(widget.doctor.name),
-          appName(),
-          addNewPatient(context, widget.doctor),
-          details(context, widget.doctor),
-          sagittal(context, widget.doctor),
-          axial(context, widget.doctor),
-          coronal(context, widget.doctor),
-
-          Transform.translate(
-            offset: Offset(810, 197.5),
-            child: SvgPicture.string(
-              _svg_jjt87m,
-              allowDrawingOutsideViewBox: true,
-            ),
-          ),
-
-          Transform.translate(
-            offset: Offset(634.0, 228.0),
-            child:
-                // Adobe XD layer: 'Image Preview' (shape)
-                Container(
-              width: 902.0,
-              height: 508.0,
-              decoration: BoxDecoration(
-                color: const Color(0xffebebeb),
-                border: Border.all(width: 4.0, color: const Color(0xffcfcfcf)),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(999.0, 387.0),
-            child:
-                // Adobe XD layer: 'Upload Icon' (group)
-                GestureDetector(
-              onTap: () => pickImage(patient),
-              child: SizedBox(
-                width: 172.0,
-                height: 190.0,
+            Transform.translate(
+              offset: Offset(281.0, 0.0),
+              child:
+                  // Adobe XD layer: 'Header Green Shapes' (group)
+                  SizedBox(
+                width: 799.0,
+                height: 92.0,
                 child: Stack(
                   children: <Widget>[
                     Pinned.fromSize(
-                      bounds: Rect.fromLTWH(0.0, 0.0, 172.0, 190.0),
-                      size: Size(172.0, 190.0),
-                      pinLeft: true,
+                      bounds: Rect.fromLTWH(433.0, 0.0, 366.4, 91.9),
+                      size: Size(799.4, 91.9),
                       pinRight: true,
                       pinTop: true,
                       pinBottom: true,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6.0),
-                          border: Border.all(
-                              width: 8.0, color: const Color(0xff9dd6b3)),
-                        ),
-                      ),
-                    ),
-                    Pinned.fromSize(
-                      bounds: Rect.fromLTWH(61.4, 64.2, 50.0, 70.0),
-                      size: Size(172.0, 190.0),
                       fixedWidth: true,
-                      fixedHeight: true,
                       child:
-                          // Adobe XD layer: 'Icon ionic-ios-arro…' (shape)
+                          // Adobe XD layer: 'Green Header Right' (shape)
                           SvgPicture.string(
-                        _svg_y9i5rg,
+                        _svg_puddb1,
                         allowDrawingOutsideViewBox: true,
                         fit: BoxFit.fill,
                       ),
                     ),
                     Pinned.fromSize(
-                      bounds: Rect.fromLTWH(20.4, 200.2, 250.0, 70.0),
-                      size: Size(172.0, 190.0),
+                      bounds: Rect.fromLTWH(0.0, 0.0, 309.3, 85.6),
+                      size: Size(799.4, 91.9),
+                      pinLeft: true,
+                      pinTop: true,
+                      pinBottom: true,
                       fixedWidth: true,
-                      fixedHeight: true,
                       child:
-                          // Adobe XD layer: 'Icon ionic-ios-arro…' (shape)
-                          Center(
-                              child: Text(
-                        'only axial view',
-                        style: TextStyle(fontSize: 25),
-                      )),
-                    )
+                          // Adobe XD layer: 'Green Header Left' (shape)
+                          SvgPicture.string(
+                        _svg_27tc3n,
+                        allowDrawingOutsideViewBox: true,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
-          ),
-          menu(context, widget.doctor)
-        ],
-      ),
-    );
+            Transform.translate(
+              offset: Offset(1070.0, 26.0),
+              child: SvgPicture.string(
+                _svg_k4y6ez,
+                allowDrawingOutsideViewBox: true,
+              ),
+            ),
+
+            doctorShape(),
+            patientsShape(),
+
+            // searchBar(),
+            listView.patientsListView(),
+            doctorName(widget.doctor.name),
+            appName(),
+            addNewPatient(context, widget.doctor),
+            details(context, widget.doctor),
+            sagittal(context, widget.doctor),
+            axial(context, widget.doctor),
+            coronal(context, widget.doctor),
+
+            Transform.translate(
+              offset: Offset(X, 197.5),
+              child: SvgPicture.string(
+                _svg_jjt87m,
+                allowDrawingOutsideViewBox: true,
+              ),
+            ),
+
+            Transform.translate(
+              offset: Offset(634.0, 228.0),
+              child:
+                  // Adobe XD layer: 'Image Preview' (shape)
+                  Container(
+                width: 902.0,
+                height: 508.0,
+                decoration: BoxDecoration(
+                  color: const Color(0xffebebeb),
+                  border:
+                      Border.all(width: 4.0, color: const Color(0xffcfcfcf)),
+                ),
+              ),
+            ),
+            Transform.translate(
+              offset: Offset(999.0, 387.0),
+              child:
+                  // Adobe XD layer: 'Upload Icon' (group)
+                  GestureDetector(
+                onTap: () => pickImage(patient),
+                child: SizedBox(
+                  width: 172.0,
+                  height: 190.0,
+                  child: Stack(
+                    children: <Widget>[
+                      Pinned.fromSize(
+                        bounds: Rect.fromLTWH(0.0, 0.0, 172.0, 190.0),
+                        size: Size(172.0, 190.0),
+                        pinLeft: true,
+                        pinRight: true,
+                        pinTop: true,
+                        pinBottom: true,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6.0),
+                            border: Border.all(
+                                width: 8.0, color: const Color(0xff9dd6b3)),
+                          ),
+                        ),
+                      ),
+                      Pinned.fromSize(
+                        bounds: Rect.fromLTWH(61.4, 64.2, 50.0, 70.0),
+                        size: Size(172.0, 190.0),
+                        fixedWidth: true,
+                        fixedHeight: true,
+                        child:
+                            // Adobe XD layer: 'Icon ionic-ios-arro…' (shape)
+                            SvgPicture.string(
+                          _svg_y9i5rg,
+                          allowDrawingOutsideViewBox: true,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      Pinned.fromSize(
+                        bounds: Rect.fromLTWH(20.4, 200.2, 250.0, 70.0),
+                        size: Size(172.0, 190.0),
+                        fixedWidth: true,
+                        fixedHeight: true,
+                        child:
+                            // Adobe XD layer: 'Icon ionic-ios-arro…' (shape)
+                            Center(
+                                child: Text(
+                          'only axial view',
+                          style: TextStyle(fontSize: 25),
+                        )),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            menu(context, widget.doctor)
+          ],
+        ),
+      );
+    else {
+      return Scaffold(
+        backgroundColor: const Color(0xfff6f6f6),
+        body: Stack(
+          children: <Widget>[
+            Transform.translate(
+              offset: Offset(-8.0, 110.0),
+              child:
+                  // Adobe XD layer: 'FVC Background' (shape)
+                  Container(
+                width: 1943.0,
+                height: 991.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: const AssetImage(
+                        'assets/images/PD_Xray_CT_Export_addnewPatient Background.png'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+            ),
+            Transform.translate(
+              offset: Offset(0.0, 110.0),
+              child:
+                  // Adobe XD layer: 'Right Side' (shape)
+                  Container(
+                width: 560.0,
+                height: 970.0,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment(0.0, -1.0),
+                    end: Alignment(0.0, 1.0),
+                    colors: [const Color(0xff94d3ac), const Color(0xffccedd2)],
+                    stops: [0.0, 1.0],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0x29000000),
+                      offset: Offset(0, 3),
+                      blurRadius: 6,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // Adobe XD layer: 'Header' (shape)
+            Container(
+              width: 1920.0,
+              height: 110.0,
+              decoration: BoxDecoration(
+                color: const Color(0xffffffff),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0x29000000),
+                    offset: Offset(0, 3),
+                    blurRadius: 6,
+                  ),
+                ],
+              ),
+            ),
+            Transform.translate(
+              offset: Offset(281.0, 0.0),
+              child:
+                  // Adobe XD layer: 'Header Green Shapes' (group)
+                  SizedBox(
+                width: 799.0,
+                height: 92.0,
+                child: Stack(
+                  children: <Widget>[
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(433.0, 0.0, 366.4, 91.9),
+                      size: Size(799.4, 91.9),
+                      pinRight: true,
+                      pinTop: true,
+                      pinBottom: true,
+                      fixedWidth: true,
+                      child:
+                          // Adobe XD layer: 'Green Header Right' (shape)
+                          SvgPicture.string(
+                        _svg_puddb1,
+                        allowDrawingOutsideViewBox: true,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(0.0, 0.0, 309.3, 85.6),
+                      size: Size(799.4, 91.9),
+                      pinLeft: true,
+                      pinTop: true,
+                      pinBottom: true,
+                      fixedWidth: true,
+                      child:
+                          // Adobe XD layer: 'Green Header Left' (shape)
+                          SvgPicture.string(
+                        _svg_27tc3n,
+                        allowDrawingOutsideViewBox: true,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Transform.translate(
+              offset: Offset(1070.0, 26.0),
+              child: SvgPicture.string(
+                _svg_k4y6ez,
+                allowDrawingOutsideViewBox: true,
+              ),
+            ),
+
+            doctorShape(),
+            patientsShape(),
+
+            //searchBar(),
+            listView.patientsListView(),
+            doctorName(widget.doctor.name),
+            appName(),
+            addNewPatient(context, widget.doctor),
+            details(context, widget.doctor),
+            sagittal(context, widget.doctor),
+            axial(context, widget.doctor),
+            coronal(context, widget.doctor),
+
+            Transform.translate(
+              offset: Offset(X, 197.5),
+              child: SvgPicture.string(
+                _svg_jjt87m,
+                allowDrawingOutsideViewBox: true,
+              ),
+            ),
+
+            Transform.translate(
+              offset: Offset(634.0, 228.0),
+              child:
+                  // Adobe XD layer: 'Image Preview' (shape)
+                  Container(
+                child: Image.asset(contents[index].path),
+                width: 902.0,
+                height: 508.0,
+                decoration: BoxDecoration(
+                  color: const Color(0xffebebeb),
+                  border:
+                      Border.all(width: 4.0, color: const Color(0xffcfcfcf)),
+                ),
+              ),
+            ),
+            Transform.translate(
+              offset: Offset(1000.0, 800.0),
+              child:
+                  // Adobe XD layer: 'Image Preview' (shape)
+                  GestureDetector(
+                onTap: ontap,
+                child: Container(
+                  child: Center(
+                      child: Text(
+                    'next',
+                    style: TextStyle(fontSize: 30),
+                  )),
+                  width: 200.0,
+                  height: 100.0,
+                  decoration: BoxDecoration(
+                    color: const Color(0xffebebeb),
+                    border:
+                        Border.all(width: 4.0, color: const Color(0xffcfcfcf)),
+                  ),
+                ),
+              ),
+            ),
+
+            menu(context, widget.doctor)
+          ],
+        ),
+      );
+    }
   }
 
   void pickImage(Patient patient) async {
     FilePickerResult result = await FilePicker.platform
         .pickFiles(allowMultiple: true, type: FileType.custom);
-    print(result.paths[0]);
+    Api().mkDir(widget.doctor.userName, patient.phoneNumber);
+    for (int i = 0; i < result.paths.length; i++) {
+      Api().uploadFiles(
+          widget.doctor.userName, result.paths[i], patient.phoneNumber);
+      //sleep(new Duration(milliseconds: 500));
+      if (i == result.paths.length - 1)
+        Api().convert(widget.doctor.userName, patient.phoneNumber);
+    }
+  }
 
-    Api().uploadFiles(
-        widget.doctor.userName, result.paths[0], patient.phoneNumber);
+  void ontap() {
+    print('hi');
+    setState(() {
+      index++;
+    });
   }
 }
 

@@ -145,6 +145,7 @@ class _FinPatientsDetailsPageState extends State<FinPatientsDetailsPage> {
           sagittal(context, widget.doctor),
           axial(context, widget.doctor),
           coronal(context, widget.doctor),
+          predict(context, widget.doctor.userName, patient.phoneNumber),
           Transform.translate(
             offset: Offset(600.0, 290.0),
             child:

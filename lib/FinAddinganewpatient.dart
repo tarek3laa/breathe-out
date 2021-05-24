@@ -34,10 +34,10 @@ class _FinAddNewPatientState extends State<FinAddNewPatient> {
   final firstFvc = TextEditingController();
   final notes = TextEditingController();
   String chosenValue = 'male';
-  String firstFvcDate = 'first fvc date';
-  var date;
+  var date = TextEditingController();
   final phoneNumber = TextEditingController();
   final age = TextEditingController();
+  final percent = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +105,7 @@ class _FinAddNewPatientState extends State<FinAddNewPatient> {
           doctorShape(), //2
           patientsShape(), //3
           PatientsListView(context, patients, setState).patientsListView(), //4
-          searchBar(), //5
+          //searchBar(), //5
           doctorName(widget.doctor.name), //6
           appName(), //7
           addNewPatient(context, widget.doctor), //8
@@ -660,23 +660,42 @@ class _FinAddNewPatientState extends State<FinAddNewPatient> {
             child:
                 // Adobe XD layer: 'Street Address' (group)
                 SizedBox(
-              width: 294.0,
+              width: 200.0,
               height: 76.0,
-              child: GestureDetector(
-                onTap: datePicker,
-                child:
-                    // Adobe XD layer: 'Address' (shape)
-                    Container(
+              child:
+                  // Adobe XD layer: 'Address' (shape)
+                  Center(
+                child: Container(
                   padding: EdgeInsets.only(left: 25, top: 25),
-                  child: Text(
-                    firstFvcDate,
-                    style: TextStyle(
-                      fontFamily: 'Helvetica Now Text',
-                      fontSize: 28,
-                      color: const Color(0xffb9b9b9),
-                    ),
-                    textAlign: TextAlign.left,
+                  child: textField(date, false, 'week', 20.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(7.0),
+                    color: const Color(0xffffffff),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0x29000000),
+                        offset: Offset(0, 3),
+                        blurRadius: 6,
+                      ),
+                    ],
                   ),
+                ),
+              ),
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(1200.0, 680.0),
+            child:
+                // Adobe XD layer: 'Street Address' (group)
+                SizedBox(
+              width: 200.0,
+              height: 76.0,
+              child:
+                  // Adobe XD layer: 'Address' (shape)
+                  Center(
+                child: Container(
+                  padding: EdgeInsets.only(left: 25, top: 25),
+                  child: textField(percent, false, 'percent', 20.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(7.0),
                     color: const Color(0xffffffff),
@@ -727,18 +746,6 @@ class _FinAddNewPatientState extends State<FinAddNewPatient> {
     });
   }
 
-  void datePicker() {
-    DatePicker.showDatePicker(context,
-        showTitleActions: true,
-        minTime: DateTime(2017, 1, 1),
-        maxTime: DateTime.now(), onConfirm: (date) {
-      setState(() {
-        firstFvcDate = date.toString().substring(0, 10);
-        this.date = date;
-      });
-    }, currentTime: DateTime.now());
-  }
-
   void proceed() {
     var statues = (smokerColor == checked)
         ? SmokingStatues.SMOKER
@@ -746,19 +753,20 @@ class _FinAddNewPatientState extends State<FinAddNewPatient> {
             ? SmokingStatues.NON_SMOKER
             : SmokingStatues.EX_SMOKER;
     var gender = (chosenValue == 'male') ? Gender.MALE : Gender.FEMALE;
+
     Patient patient = Patient(
         firstName.text + ' ' + lastName.text,
         phoneNumber.text,
         statues,
         gender,
-        streetAddress.text,
+        int.parse(firstFvc.text),
+        int.parse(age.text),
         DateTime.now().toString(),
-        int.parse(age.text));
-    patient.notes = notes.text;
-    if (firstFvc.text.isNotEmpty && this.date != null) {
-      patient.firstFvc = int.parse(firstFvc.text);
-      patient.firstFvcDate = this.date;
-    }
+        [],
+        streetAddress.text,
+        notes.text,
+        int.parse(date.text),
+        int.parse(percent.text));
 
     widget.doctor.listOfPatients.add(patient);
     //todo push patient into api
