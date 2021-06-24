@@ -1,4 +1,3 @@
-import 'package:breathe_out/FinExporting.dart';
 import 'package:breathe_out/FinPatientsDetailsPage.dart';
 import 'package:breathe_out/FinAxialPage.dart';
 import 'package:breathe_out/FinPatientsFVCPredictionPage2.dart';

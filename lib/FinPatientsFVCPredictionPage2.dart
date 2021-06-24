@@ -783,7 +783,7 @@ class _FinPatientsFVCPredictionPage2State
                     fixedWidth: true,
                     fixedHeight: true,
                     child: Text(
-                      'Week 1',
+                      'Week1',
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 36,
@@ -802,7 +802,11 @@ class _FinPatientsFVCPredictionPage2State
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
-                      child: Center(child: Text((list != null) ? list[0].toString() : '0')),
+                      child: Center(
+                          child: Text(
+                        (list != null) ? list[0].round().toString() : '0',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      )),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -831,7 +835,7 @@ class _FinPatientsFVCPredictionPage2State
                     fixedWidth: true,
                     fixedHeight: true,
                     child: Text(
-                      'Week 2',
+                      'Week2',
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 36,
@@ -850,7 +854,11 @@ class _FinPatientsFVCPredictionPage2State
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
-                      child: Text((list != null) ? list[1].toString() : '0'),
+                      child: Center(
+                          child: Text(
+                        (list != null) ? list[1].round().toString() : '0',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      )),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -879,7 +887,7 @@ class _FinPatientsFVCPredictionPage2State
                     fixedWidth: true,
                     fixedHeight: true,
                     child: Text(
-                      'Week 3',
+                      'Week3',
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 36,
@@ -898,7 +906,11 @@ class _FinPatientsFVCPredictionPage2State
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
-                      child: Text((list != null) ? list[2].toString() : '0'),
+                      child: Center(
+                          child: Text(
+                        (list != null) ? list[2].round().toString() : '0',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      )),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -927,7 +939,7 @@ class _FinPatientsFVCPredictionPage2State
                     fixedWidth: true,
                     fixedHeight: true,
                     child: Text(
-                      'Week 4',
+                      'Week4',
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 36,
@@ -946,6 +958,11 @@ class _FinPatientsFVCPredictionPage2State
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
+                      child: Center(
+                          child: Text(
+                        (list != null) ? list[3].round().toString() : '0',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      )),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -974,7 +991,7 @@ class _FinPatientsFVCPredictionPage2State
                     fixedWidth: true,
                     fixedHeight: true,
                     child: Text(
-                      'Week 5',
+                      'Week5',
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 36,
@@ -993,6 +1010,11 @@ class _FinPatientsFVCPredictionPage2State
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
+                      child: Center(
+                          child: Text(
+                        (list != null) ? list[4].round().toString() : '0',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      )),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -1021,7 +1043,7 @@ class _FinPatientsFVCPredictionPage2State
                     fixedWidth: true,
                     fixedHeight: true,
                     child: Text(
-                      'Week 6',
+                      'Week6',
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 36,
@@ -1040,6 +1062,11 @@ class _FinPatientsFVCPredictionPage2State
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
+                      child: Center(
+                          child: Text(
+                        (list != null) ? list[5].round().toString() : '0',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      )),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -1068,7 +1095,7 @@ class _FinPatientsFVCPredictionPage2State
                     fixedWidth: true,
                     fixedHeight: true,
                     child: Text(
-                      'Week 7',
+                      'Week7',
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 36,
@@ -1087,6 +1114,11 @@ class _FinPatientsFVCPredictionPage2State
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
+                      child: Center(
+                          child: Text(
+                        (list != null) ? list[6].round().toString() : '0',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      )),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -1115,7 +1147,7 @@ class _FinPatientsFVCPredictionPage2State
                     fixedWidth: true,
                     fixedHeight: true,
                     child: Text(
-                      'Week 8',
+                      'Week8',
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 36,
@@ -1134,6 +1166,11 @@ class _FinPatientsFVCPredictionPage2State
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
+                      child: Center(
+                          child: Text(
+                        (list != null) ? list[7].round().toString() : '0',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      )),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -1162,7 +1199,7 @@ class _FinPatientsFVCPredictionPage2State
                     fixedWidth: true,
                     fixedHeight: true,
                     child: Text(
-                      'Week 9',
+                      'Week9',
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 36,
@@ -1181,6 +1218,11 @@ class _FinPatientsFVCPredictionPage2State
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
+                      child: Center(
+                          child: Text(
+                        (list != null) ? list[8].round().toString() : '0',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      )),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -1209,7 +1251,7 @@ class _FinPatientsFVCPredictionPage2State
                     fixedWidth: true,
                     fixedHeight: true,
                     child: Text(
-                      'Week 10',
+                      'Week10',
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 36,
@@ -1228,6 +1270,11 @@ class _FinPatientsFVCPredictionPage2State
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
+                      child: Center(
+                          child: Text(
+                        (list != null) ? list[9].round().toString() : '0',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      )),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -1250,13 +1297,13 @@ class _FinPatientsFVCPredictionPage2State
               child: Stack(
                 children: <Widget>[
                   Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 11.0, 136.0, 37.0),
+                    bounds: Rect.fromLTWH(0.0, 11.0, 140.0, 37.0),
                     size: Size(348.0, 60.0),
                     pinLeft: true,
                     fixedWidth: true,
                     fixedHeight: true,
                     child: Text(
-                      'Week 11',
+                      'Week11',
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 36,
@@ -1275,6 +1322,11 @@ class _FinPatientsFVCPredictionPage2State
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
+                      child: Center(
+                          child: Text(
+                        (list != null) ? list[10].round().toString() : '0',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      )),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -1303,7 +1355,7 @@ class _FinPatientsFVCPredictionPage2State
                     fixedWidth: true,
                     fixedHeight: true,
                     child: Text(
-                      'Week 12',
+                      'Week12',
                       style: TextStyle(
                         fontFamily: 'Helvetica Now Text',
                         fontSize: 36,
@@ -1322,6 +1374,11 @@ class _FinPatientsFVCPredictionPage2State
                     child:
                         // Adobe XD layer: 'Week Value' (shape)
                         Container(
+                      child: Center(
+                          child: Text(
+                        (list != null) ? list[11].round().toString() : '0',
+                        style: TextStyle(color: Colors.black, fontSize: 30),
+                      )),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         color: const Color(0xfff4f4f4),
@@ -1334,13 +1391,7 @@ class _FinPatientsFVCPredictionPage2State
               ),
             ),
           ),
-          Transform.translate(
-            offset: Offset(1769.0, 108.0),
-            child: SvgPicture.string(
-              _svg_m6g5mc,
-              allowDrawingOutsideViewBox: true,
-            ),
-          ),
+
         ],
       ),
     );

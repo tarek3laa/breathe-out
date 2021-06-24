@@ -95,7 +95,7 @@ class Patient {
 
   String get address => _address;
 
-  List<String> get axial => _axial;
+  List<dynamic> get axial => _axial;
 
   String get registeredDate => _registeredDate;
 

@@ -17,6 +17,8 @@ import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'package:photo_view/photo_view.dart';
 
+var flag = false;
+
 class FinPatientsFVCPredictionPage extends StatefulWidget {
   final Doctor doctor;
   final Tabs tabs;
@@ -45,9 +47,6 @@ class _FinPatientsFVCPredictionPageState
   getContent() {
     var dir;
     try {
-      try {
-        Api().convert(widget.doctor.userName, patient.phoneNumber);
-      } catch (e) {}
       c = false;
       if (widget.tabs == Tabs.Axial)
         dir = new Directory(
@@ -62,6 +61,13 @@ class _FinPatientsFVCPredictionPageState
       for (var fileOrDir in contents) {
         print(fileOrDir.path);
       }
+
+      try {
+        if (!flag) {
+          Api().convert(widget.doctor.userName, patient.phoneNumber);
+          flag = true;
+        }
+      } catch (e) {}
     } catch (e) {
       c = true;
     }
